@@ -11,7 +11,7 @@ const RESTAURANTE_NAME = "Alesus Rest - Cevicheria";
 const RESTAURANTE_SLOGAN = "Comida criolla y marina con un toque gourmet y mucho corazón";
 const WHATSAPP_NUMBER = "51944482063"; // Reemplaza con tu número de WhatsApp con código de país (ej: 51 para Perú)
 const FACEBOOK_URL = "";
-const MAPS_URL = "";
+const MAPS_URL = "https://maps.app.goo.gl/eARfD9Xne6u6rkqt7";
 const LOGO_FOOTER_PATH = ""; // Reemplaza con la ruta de tu logo en public/ (ej: /logo.png)
 const BANNER_PATH = ""; // Reemplaza con la ruta de tu banner en public/ (ej: /banner.png)
 const MARQUEE_TEXT = "🌊 LA FRESCURA DEL MAR EN CADA PLATO • 🇵🇪 TRADICIÓN CRIOLLA Y TOQUE GOURMET • ¡VIVE LA EXPERIENCIA ALESUS! 🍤🍷 • ";
@@ -48,6 +48,7 @@ export default function App() {
   const [showSummary, setShowSummary] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedDish, setSelectedDish] = useState<Dish | null>(null);
 
   // States for Birthday Form
   const [showBirthdayForm, setShowBirthdayForm] = useState(false);
@@ -272,6 +273,17 @@ export default function App() {
               <MapPin size={22} />
             </motion.a>
           )}
+          <motion.a
+            href="https://wa.me/c/51944482063"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileTap={{ scale: 0.95 }}
+            className="w-11 h-11 bg-[#25D366]/10 rounded-full flex items-center justify-center text-[#25D366] cursor-pointer"
+          >
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.66.986 3.292 1.503 5.361 1.504 5.395 0 9.785-4.389 9.788-9.784.002-2.589-1.002-5.023-2.83-6.853C17.086 2.19 14.659.988 12.01.988 6.618.988 2.228 5.378 2.225 10.774c-.001 2.164.57 4.015 1.624 5.7l-.98 3.58 3.778-.99zM15.82 13c-.32-.16-1.884-.93-2.175-1.036-.29-.107-.503-.16-.714.16-.21.32-.818 1.036-1.003 1.25-.186.213-.37.24-.69.08-.32-.16-1.353-.5-2.576-1.593-.952-.85-1.593-1.9-1.782-2.22-.19-.32-.02-.492.14-.65.144-.142.32-.373.48-.56.16-.186.213-.32.32-.533.107-.213.053-.4-.027-.56-.08-.16-.714-1.72-.98-2.36-.258-.62-.522-.536-.714-.546-.185-.01-.397-.01-.61-.01s-.56.08-.853.4c-.293.32-1.12 1.1-1.12 2.68s1.147 3.12 1.307 3.33c.16.213 2.257 3.447 5.467 4.837.763.33 1.357.527 1.82.674.767.244 1.467.21 2.02.127.615-.093 1.885-.77 2.152-1.48.267-.71.267-1.32.187-1.448-.08-.127-.293-.207-.613-.367z"/>
+            </svg>
+          </motion.a>
           <motion.div
             onClick={() => cartCount > 0 && setShowSummary(true)}
             whileTap={{ scale: 0.95 }}
@@ -353,12 +365,24 @@ export default function App() {
                 <motion.div
                   key={idx}
                   whileHover={{ y: -4 }}
-                  className="bg-white rounded-[2rem] overflow-hidden flex flex-col shadow-sm border border-gray-100 hover:border-primary/30 hover:shadow-md transition-all duration-200"
+                  onClick={() => setSelectedDish(dish)}
+                  className="bg-white rounded-[2rem] overflow-hidden flex flex-col shadow-sm border border-gray-100 hover:border-primary/30 hover:shadow-md transition-all duration-200 cursor-pointer"
                 >
-                  <div className="bg-primary/5 aspect-square flex items-center justify-center relative overflow-hidden p-4 border-b border-gray-100">
-                    <span className="font-dish font-bold text-[11px] text-primary uppercase tracking-wider text-center">
-                      aca va a imagen
-                    </span>
+                  <div className="bg-primary/5 aspect-square flex items-center justify-center relative overflow-hidden border-b border-gray-100">
+                    {dish.imagen ? (
+                      <img 
+                        src={dish.imagen} 
+                        alt={dish.nombre} 
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="flex flex-col items-center justify-center gap-1.5 p-4">
+                        <Utensils className="text-primary/20" size={24} />
+                        <span className="font-dish font-bold text-[9px] text-primary/40 uppercase tracking-widest text-center">
+                          Alesus Rest
+                        </span>
+                      </div>
+                    )}
                   </div>
                   
                   <div className="p-4 flex flex-col flex-1">
@@ -377,7 +401,10 @@ export default function App() {
                       </span>
                       <motion.button
                         whileTap={{ scale: 0.8 }}
-                        onClick={() => addToCart(dish)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          addToCart(dish);
+                        }}
                         className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary transition-colors duration-200 shrink-0"
                       >
                         <Plus size={16} strokeWidth={3} />
@@ -708,6 +735,85 @@ export default function App() {
                   </button>
                 </form>
               )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {selectedDish && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[80] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={() => setSelectedDish(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-white w-full max-w-sm rounded-[2.5rem] overflow-hidden shadow-2xl relative flex flex-col max-h-[90vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setSelectedDish(null)}
+                className="absolute top-4 right-4 w-9 h-9 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-md z-10 hover:bg-white transition-colors"
+              >
+                <X size={18} className="text-gray-700" />
+              </button>
+
+              {/* Image Container */}
+              <div className="w-full aspect-[4/3] bg-primary/5 flex items-center justify-center relative overflow-hidden border-b border-gray-100">
+                {selectedDish.imagen ? (
+                  <img
+                    src={selectedDish.imagen}
+                    alt={selectedDish.nombre}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="flex flex-col items-center justify-center gap-2">
+                    <Utensils size={48} className="text-primary/20 animate-pulse" />
+                    <span className="font-dish font-bold text-[10px] text-primary/40 uppercase tracking-widest">
+                      Alesus Gourmet
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              {/* Content Container */}
+              <div className="p-6 flex flex-col overflow-y-auto">
+                <h3 className="font-dish font-bold text-dark text-xl leading-tight mb-2">
+                  {selectedDish.nombre}
+                </h3>
+                
+                <span className="inline-block font-dish font-bold text-primary text-[20px] mb-4">
+                  {selectedDish.precio}
+                </span>
+
+                {selectedDish.descripcion && (
+                  <div className="mb-6">
+                    <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Descripción</h4>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      {selectedDish.descripcion}
+                    </p>
+                  </div>
+                )}
+
+                {/* Add to Order Button */}
+                <motion.button
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => {
+                    addToCart(selectedDish);
+                    setSelectedDish(null);
+                  }}
+                  className="w-full bg-primary text-white py-4 rounded-2xl flex items-center justify-center gap-2 shadow-lg shadow-primary/20 font-bold text-sm hover:bg-primary/95 transition-colors"
+                >
+                  <Plus size={16} strokeWidth={3} />
+                  <span>Agregar al Pedido • {selectedDish.precio}</span>
+                </motion.button>
+              </div>
             </motion.div>
           </motion.div>
         )}
