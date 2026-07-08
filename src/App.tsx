@@ -11,7 +11,7 @@ const RESTAURANTE_NAME = "Alesus Rest - Cevicheria";
 const RESTAURANTE_SLOGAN = "Comida criolla y marina con un toque gourmet y mucho corazón";
 const WHATSAPP_NUMBER = "51944482063"; // Reemplaza con tu número de WhatsApp con código de país (ej: 51 para Perú)
 const FACEBOOK_URL = "";
-const MAPS_URL = "https://maps.app.goo.gl/eARfD9Xne6u6rkqt7";
+const MAPS_URL = "https://www.google.com/maps/place/ALESUS/@-11.9890532,-77.0139224,14.07z/data=!4m6!3m5!1s0x9105c50046b458bb:0x9667530c92b272cc!8m2!3d-11.9984878!4d-77.0089329!16s%2Fg%2F11y4_lmyty!5m1!1e1?entry=ttu&g_ep=EgoyMDI2MDcwNi4wIKXMDSoASAFQAw%3D%3D";
 const LOGO_FOOTER_PATH = ""; // Reemplaza con la ruta de tu logo en public/ (ej: /logo.png)
 const BANNER_PATH = ""; // Reemplaza con la ruta de tu banner en public/ (ej: /banner.png)
 const MARQUEE_TEXT = "🌊 LA FRESCURA DEL MAR EN CADA PLATO • 🇵🇪 TRADICIÓN CRIOLLA Y TOQUE GOURMET • ¡VIVE LA EXPERIENCIA ALESUS! 🍤🍷 • ";
@@ -649,6 +649,20 @@ export default function App() {
             <Star size={18} className="fill-white" />
             Reseña nuestra comida
           </motion.button>
+        </section>
+
+        <section className="mt-2 mb-4 overflow-hidden border border-gray-100 bg-white rounded-3xl p-2 shadow-sm">
+          <div className="rounded-2xl overflow-hidden h-[250px] relative w-full">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29690.45323806844!2d-77.01392238135257!3d-11.989053213295936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c50046b458bb%3A0x9667530c92b272cc!2sALESUS!5e0!3m2!1ses!2spe!4v1783551070288!5m2!1ses!2spe" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen={true} 
+              loading="lazy" 
+              referrerPolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
         </section>
 
         <footer className="mt-8 pt-8 pb-10 border-t border-gray-200 flex flex-col items-center justify-center">
