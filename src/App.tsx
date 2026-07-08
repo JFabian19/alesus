@@ -34,6 +34,8 @@ const LOCAL_IMAGES: Record<string, string> = {
   "Jalea Mixta": "/jalea_mixta.jpg",
   "CHICHARRON DE PESCADO": "/chicharron_pescado.jpg",
   "Chicharrón de Pescado": "/chicharron_pescado.jpg",
+  "Chicharrón de Calamar": "/chicharron_calamar.png",
+  "Chicharrón de Calamar (Porción)": "/chicharron_calamar.png",
   "DÚO ORIENTAL": "/duo_oriental.png",
   "DÚO CAUSERO": "/duo_casero.png",
   "DÚO CLÁSICO": "/duo_clasico.png",
