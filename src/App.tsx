@@ -84,8 +84,8 @@ export default function App() {
         }
 
         const [cats, dishes] = await Promise.all([
-          fetchSheetData<SheetCategory>('Categorías'),
-          fetchSheetData<SheetDish>('Platos')
+          fetchSheetData<SheetCategory>('categorías'),
+          fetchSheetData<SheetDish>('platos')
         ]);
 
         if (cats.length === 0 && dishes.length === 0) {
@@ -97,10 +97,10 @@ export default function App() {
         }
 
         const formattedCategories: Category[] = cats.map(c => ({
-          id: c.nombre.toLowerCase().replace(/\s+/g, '-'),
-          nombre: c.nombre,
+          id: c.categorías.toLowerCase().replace(/\s+/g, '-'),
+          nombre: c.categorías,
           items: dishes
-            .filter(d => d.categoría === c.nombre)
+            .filter(d => d.categoría === c.categorías)
             .map(d => ({
               nombre: d['nombre del plato'],
               descripcion: d.descripción,
@@ -185,11 +185,11 @@ export default function App() {
   const handleBirthdaySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmittingBirthday(true);
-    const success = await submitSheetData('Cumpleaños', {
+    const success = await submitSheetData('fidelización', {
       timestamp: new Date().toLocaleString('es-PE'),
       nombre: birthdayData.nombre,
-      telefono: birthdayData.telefono,
-      fechaNacimiento: birthdayData.fechaNacimiento,
+      teléfono: birthdayData.telefono,
+      'fecha de nacimiento': birthdayData.fechaNacimiento,
       distrito: birthdayData.distrito,
       correo: birthdayData.correo || 'No indicado'
     });
@@ -215,10 +215,10 @@ export default function App() {
     }
 
     setIsSubmittingReview(true);
-    const success = await submitSheetData('Reseñas', {
+    const success = await submitSheetData('reseñas', {
       timestamp: new Date().toLocaleString('es-PE'),
-      estrellasMozo: reviewData.estrellasMozo,
-      estrellasComida: reviewData.estrellasComida,
+      'estrellas mozo': reviewData.estrellasMozo,
+      'estrellas comida': reviewData.estrellasComida,
       comentario: reviewData.comentario || 'Sin comentarios'
     });
     

@@ -1,7 +1,6 @@
 import Papa from 'papaparse';
 
-// Coloca aquí tu ID de Google Sheets (lo encuentras en la URL de tu hoja de cálculo)
-export const SHEET_ID = '';
+export const SHEET_ID = '1TI-lJqw0Mz6dpPoyPsBTetQZ3GP1dDCTphnW8dGoozA';
 
 export interface SheetDish {
   categoría: string;
@@ -12,7 +11,7 @@ export interface SheetDish {
 }
 
 export interface SheetCategory {
-  nombre: string;
+  categorías: string;
 }
 
 export const fetchSheetData = async <T>(sheetName: string): Promise<T[]> => {
