@@ -58,6 +58,89 @@ const LOCAL_IMAGES: Record<string, string> = {
   "Jalea de Pescado (Porción)": "/jalea_pescado.png",
   "Arroz con mariscos + ceviche": "/arroz_mariscos_ceviche.png",
   "Chaufa de pescado + ceviche": "/chaufa_pescado_ceviche.png",
+  "Chaufa de mariscos + ceviche": "/chaufa_mariscos_ceviche.png",
+  "Arroz con mariscos + chicharrón": "/arroz_mariscos_chicharron.png",
+  "Chaufa de mariscos + chicharrón": "/chaufa_mariscos_chicharron.png",
+  "Chicharrón de pescado (Niños)": "/chicharron_pescado_ninos.png",
+  "Chicharrón de pollo (Niños)": "/chicharron_pollo.png",
+  "Milanesa de pollo (Niños)": "/milanesa_pollo.png",
+  "Salchipapa (Niños)": "/salchipapa.png",
+  "Tallarines en salsa alfredo (Niños)": "/tallarines_alfredo.png",
+  "Chicharrón de pescado": "/chicharron_pescado_ninos.png",
+  "chicharrón de pescado": "/chicharron_pescado_ninos.png",
+  "Chicharrón de pollo": "/chicharron_pollo.png",
+  "chicharrón de pollo": "/chicharron_pollo.png",
+  "Milanesa de pollo": "/milanesa_pollo.png",
+  "milanesa de pollo": "/milanesa_pollo.png",
+  "Salchipapa": "/salchipapa.png",
+  "salchipapa": "/salchipapa.png",
+  "Tallarines en salsa alfredo": "/tallarines_alfredo.png",
+  "tallarines en salsa alfredo": "/tallarines_alfredo.png",
+  "Tallarines en salsa Alfredo": "/tallarines_alfredo.png",
+  "Santiago Queirolo": "/santiago_queirolo.png",
+  "santiago queirolo": "/santiago_queirolo.png",
+  "Tabernero": "/tabernero.png",
+  "tabernero": "/tabernero.png",
+  "Tacama": "/tacama.png",
+  "tacama": "/tacama.png",
+  "Casillero del Diablo": "/casillero_del_diablo.png",
+  "casillero del diablo": "/casillero_del_diablo.png",
+  "Navarro Correas": "/navarro_correas.png",
+  "navarro correas": "/navarro_correas.png",
+  "Pilsen": "/pilsen.png",
+  "pilsen": "/pilsen.png",
+  "Cristal": "/cristal.png",
+  "cristal": "/cristal.png",
+  "Cusqueña": "/cusquena.png",
+  "cusqueña": "/cusquena.png",
+  "Corona": "/corona.png",
+  "corona": "/corona.png",
+  "Stella Artois": "/stella_artois.png",
+  "stella artois": "/stella_artois.png",
+  "Heineken": "/heineken.png",
+  "heineken": "/heineken.png",
+  "Café Pasado": "/cafe_pasado.png",
+  "café pasado": "/cafe_pasado.png",
+  "Infusiones": "/infusiones.png",
+  "infusiones": "/infusiones.png",
+  "Tortilla de Mariscos": "/tortilla_mariscos.png",
+  "tortilla de mariscos": "/tortilla_mariscos.png",
+  "Tortilla de Langostinos": "/tortilla_langostinos.png",
+  "tortilla de langostinos": "/tortilla_langostinos.png",
+  "Tortilla de Verduras": "/tortilla_verduras.png",
+  "tortilla de verduras": "/tortilla_verduras.png",
+  "Porción de Arroz": "/porcion_arroz.png",
+  "porción de arroz": "/porcion_arroz.png",
+  "porcion de arroz": "/porcion_arroz.png",
+  "Porción de Yuca": "/porcion_yuca.png",
+  "porción de yuca": "/porcion_yuca.png",
+  "porcion de yuca": "/porcion_yuca.png",
+  "Porción de Camote": "/porcion_camote.png",
+  "porción de camote": "/porcion_camote.png",
+  "porcion de camote": "/porcion_camote.png",
+  "Porción de Papas Fritas": "/porcion_papas.png",
+  "porción de papas fritas": "/porcion_papas.png",
+  "porcion de papas fritas": "/porcion_papas.png",
+  "Porción de Chifles": "/porcion_chifles.png",
+  "porción de chifles": "/porcion_chifles.png",
+  "porcion de chifles": "/porcion_chifles.png",
+  "Porción de Cancha": "/porcion_cancha.png",
+  "porción de cancha": "/porcion_cancha.png",
+  "porcion de cancha": "/porcion_cancha.png",
+  "Gaseosa Gordita": "/gaseosa_gordita.png",
+  "gaseosa gordita": "/gaseosa_gordita.png",
+  "Inka Cola / Coca Cola / Sprite / Fanta 500ml": "/gaseosa_500ml.png",
+  "inka cola / coca cola / sprite / fanta 500ml": "/gaseosa_500ml.png",
+  "Gaseosa Personal": "/gaseosa_personal.png",
+  "gaseosa personal": "/gaseosa_personal.png",
+  "Agua Mineral": "/agua_mineral.png",
+  "agua mineral": "/agua_mineral.png",
+  "Limonada / Chicha Morada / Maracuyá / Chicha de Jora (1/2 Jarra)": "/refrescos_media_jarra.png",
+  "limonada / chicha morada / maracuyá / chicha de jora (1/2 jarra)": "/refrescos_media_jarra.png",
+  "Limonada / Chicha Morada / Maracuyá / Chicha de Jora (Jarra)": "/refrescos_jarra.png",
+  "limonada / chicha morada / maracuyá / chicha de jora (jarra)": "/refrescos_jarra.png",
+  "Limonada / Chicha Morada / Maracuyá / Chicha de Jora (Vaso)": "/refrescos_vaso.png",
+  "limonada / chicha morada / maracuyá / chicha de jora (vaso)": "/refrescos_vaso.png",
   "SUSTANCIA DE CARNE": "/sustancia_carne.png",
   "SOPA DE DIETA": "/sopa_dieta.png",
   "CHUPE DE CANGREJO": "/chupe_cangrejo.png",
@@ -136,6 +219,19 @@ export default function App() {
     comentario: ''
   });
 
+  // State for Customizable Drinks/Infusions Modal
+  const [customOptionsModal, setCustomOptionsModal] = useState<{
+    isOpen: boolean;
+    dish: Dish | null;
+    options: string[];
+    title: string;
+  }>({
+    isOpen: false,
+    dish: null,
+    options: [],
+    title: ''
+  });
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -169,7 +265,11 @@ export default function App() {
               nombre: d['nombre del plato'],
               descripcion: d.descripción,
               precio: d.precio,
-              imagen: LOCAL_IMAGES[d['nombre del plato']] || d['URL de imagen'] || null
+              imagen: LOCAL_IMAGES[d['nombre del plato']] || 
+                      LOCAL_IMAGES[d['nombre del plato'].trim()] || 
+                      LOCAL_IMAGES[d['nombre del plato'].toLowerCase().trim()] || 
+                      d['URL de imagen'] || 
+                      null
             }))
         }));
 
@@ -193,17 +293,73 @@ export default function App() {
 
   const cartCount = useMemo(() => cart.reduce((acc, item) => acc + item.cantidad, 0), [cart]);
 
-  const addToCart = (dish: Dish) => {
+  const addToCart = (dish: Dish, forceOption?: string) => {
+    const dishNameLower = dish.nombre.toLowerCase().trim();
+
+    // 1. Interceptar Infusiones
+    if (dishNameLower === "infusiones" && !forceOption) {
+      setCustomOptionsModal({
+        isOpen: true,
+        dish,
+        options: ["Té", "Anís", "Manzanilla"],
+        title: "Selecciona el sabor de tu Infusión"
+      });
+      return;
+    }
+
+    // 2. Interceptar gaseosa de 500ml
+    if (dishNameLower === "inka cola / coca cola / sprite / fanta 500ml" && !forceOption) {
+      setCustomOptionsModal({
+        isOpen: true,
+        dish,
+        options: ["Inka Kola", "Coca Cola", "Sprite", "Fanta"],
+        title: "Selecciona el sabor de tu gaseosa de 500ml"
+      });
+      return;
+    }
+
+    // 3. Interceptar gaseosa personal
+    if (dishNameLower === "gaseosa personal" && !forceOption) {
+      setCustomOptionsModal({
+        isOpen: true,
+        dish,
+        options: ["Inka Kola", "Coca Cola", "Sprite", "Fanta"],
+        title: "Selecciona el sabor de tu gaseosa personal"
+      });
+      return;
+    }
+
+    // 4. Interceptar refrescos naturales por vaso, jarra o media jarra
+    const isJarra1 = dishNameLower === "limonada / chicha morada / maracuyá / chicha de jora (jarra)";
+    const isJarra2 = dishNameLower === "limonada / chicha morada / maracuyá / chicha de jora (1/2 jarra)";
+    const isJarra3 = dishNameLower === "limonada / chicha morada / maracuyá / chicha de jora (vaso)";
+    if ((isJarra1 || isJarra2 || isJarra3) && !forceOption) {
+      let suffix = " (Vaso)";
+      if (isJarra1) suffix = " (Jarra)";
+      if (isJarra2) suffix = " (1/2 Jarra)";
+
+      setCustomOptionsModal({
+        isOpen: true,
+        dish,
+        options: ["Limonada", "Chicha Morada", "Maracuyá", "Chicha de Jora"],
+        title: `Selecciona el sabor de tu bebida${suffix}`
+      });
+      return;
+    }
+
+    // Nombre definitivo del item del carrito
+    const cartItemName = forceOption ? `${dish.nombre} - ${forceOption}` : dish.nombre;
+
     setCart(prev => {
-      const existing = prev.find(i => i.nombre === dish.nombre && i.precio === dish.precio);
+      const existing = prev.find(i => i.nombre === cartItemName && i.precio === dish.precio);
       if (existing) {
         return prev.map(i =>
-          (i.nombre === dish.nombre && i.precio === dish.precio)
+          (i.nombre === cartItemName && i.precio === dish.precio)
             ? { ...i, cantidad: i.cantidad + 1 }
             : i
         );
       }
-      return [...prev, { nombre: dish.nombre, precio: dish.precio, cantidad: 1 }];
+      return [...prev, { nombre: cartItemName, precio: dish.precio, cantidad: 1 }];
     });
   };
 
@@ -878,6 +1034,62 @@ export default function App() {
                   <Plus size={16} strokeWidth={3} />
                   <span>Agregar al Pedido • {selectedDish.precio}</span>
                 </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {customOptionsModal.isOpen && customOptionsModal.dish && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-white w-full max-w-sm rounded-[2rem] p-6 shadow-2xl relative flex flex-col max-h-[90vh]"
+            >
+              <button
+                onClick={() => setCustomOptionsModal({ isOpen: false, dish: null, options: [], title: "" })}
+                className="absolute top-4 right-4 w-8 h-8 bg-gray-50 rounded-full flex items-center justify-center"
+              >
+                <X size={18} className="text-gray-400" />
+              </button>
+
+              <div className="flex flex-col items-center text-center mb-6 mt-2">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-3 text-primary">
+                  <Utensils size={24} />
+                </div>
+                <h3 className="font-dish font-bold text-lg text-dark leading-tight px-4">
+                  {customOptionsModal.title}
+                </h3>
+                <p className="text-[11px] text-gray-400 mt-1">
+                  Elige una opción para añadir al pedido:
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-2.5 mb-2 overflow-y-auto pr-1 max-h-[40vh]">
+                {customOptionsModal.options.map((option) => (
+                  <motion.button
+                    key={option}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => {
+                      if (customOptionsModal.dish) {
+                        addToCart(customOptionsModal.dish, option);
+                      }
+                      setCustomOptionsModal({ isOpen: false, dish: null, options: [], title: "" });
+                    }}
+                    className="w-full bg-gray-50 border border-gray-100 rounded-2xl py-3.5 px-5 text-left text-sm font-bold text-dark hover:bg-primary/5 hover:border-primary/20 transition-all flex items-center justify-between"
+                  >
+                    <span>{option}</span>
+                    <Plus size={16} className="text-primary" />
+                  </motion.button>
+                ))}
               </div>
             </motion.div>
           </motion.div>
