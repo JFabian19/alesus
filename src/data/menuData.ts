@@ -91,24 +91,7 @@ export const DEFAULT_MENU_DATA: Category[] = [
       }
     ]
   },
-  {
-    id: "calientitos",
-    nombre: "Calientitos",
-    items: [
-      {
-        nombre: "JALEA MIXTA",
-        descripcion: "Combinación de pescado, mariscos fritos y crocantes acompañados de salsa criolla, choclo y yuca frita.",
-        precio: "S/ 40.00",
-        imagen: "/jalea_mixta.jpg"
-      },
-      {
-        nombre: "CHICHARRON DE PESCADO",
-        descripcion: "Deliciosos cortes de pescados capeados con una mezcla de harina y huevo preparador a fritura profunda.",
-        precio: "S/ 35.00",
-        imagen: "/chicharron_pescado.jpg"
-      }
-    ]
-  },
+
   {
     id: "chicharrones-y-jaleas",
     nombre: "Chicharrones y Jaleas",
@@ -145,30 +128,7 @@ export const DEFAULT_MENU_DATA: Category[] = [
       }
     ]
   },
-  {
-    id: "duos-marinos",
-    nombre: "Dúos Marinos",
-    items: [
-      {
-        nombre: "DÚO ORIENTAL",
-        descripcion: "Ceviche de pescado + Chaufa de mariscos.",
-        precio: "S/ 35.00",
-        imagen: "/duo_oriental.png"
-      },
-      {
-        nombre: "DÚO CAUSERO",
-        descripcion: "Causa de atún + Ceviche de pescado.",
-        precio: "S/ 33.00",
-        imagen: "/duo_casero.png"
-      },
-      {
-        nombre: "DÚO CLÁSICO",
-        descripcion: "Ceviche de pescado + Arroz con mariscos.",
-        precio: "S/ 33.00",
-        imagen: "/duo_clasico.png"
-      }
-    ]
-  },
+
   {
     id: "trios-marinos",
     nombre: "Tríos Marinos",
