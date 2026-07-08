@@ -193,6 +193,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [showSummary, setShowSummary] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<string>('efectivo');
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedDish, setSelectedDish] = useState<Dish | null>(null);
@@ -391,6 +392,12 @@ export default function App() {
     cart.forEach(item => {
       message += `• ${item.cantidad} x ${item.nombre} (${item.precio})\n`;
     });
+    
+    let paymentLabel = 'Efectivo';
+    if (paymentMethod === 'tarjeta') paymentLabel = 'Tarjeta Débito/Crédito';
+    if (paymentMethod === 'yape_plin') paymentLabel = 'Yape / Plin';
+
+    message += `\n*Método de Pago:* ${paymentLabel}`;
     message += `\n*TOTAL: S/.${total.toFixed(2)}*`;
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
@@ -770,7 +777,47 @@ export default function App() {
                   </div>
                 ))}
               </div>
-              <div className="border-t border-dashed border-gray-200 pt-6 mb-8">
+              <div className="border-t border-dashed border-gray-200 pt-6 mb-6">
+                <h4 className="font-dish text-sm font-bold text-dark mb-3 text-left">Método de pago:</h4>
+                <div className="grid grid-cols-3 gap-2 mb-6">
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod('efectivo')}
+                    className={`py-2.5 px-1 rounded-xl text-xs font-bold border transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
+                      paymentMethod === 'efectivo'
+                        ? 'border-primary bg-primary/5 text-primary shadow-sm font-extrabold'
+                        : 'border-gray-200 bg-white text-gray-500 hover:bg-gray-50'
+                    }`}
+                  >
+                    <span className="text-lg">💵</span>
+                    <span>Efectivo</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod('tarjeta')}
+                    className={`py-2.5 px-1 rounded-xl text-xs font-bold border transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
+                      paymentMethod === 'tarjeta'
+                        ? 'border-primary bg-primary/5 text-primary shadow-sm font-extrabold'
+                        : 'border-gray-200 bg-white text-gray-500 hover:bg-gray-50'
+                    }`}
+                  >
+                    <span className="text-lg">💳</span>
+                    <span>Tarjeta</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod('yape_plin')}
+                    className={`py-2.5 px-1 rounded-xl text-xs font-bold border transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
+                      paymentMethod === 'yape_plin'
+                        ? 'border-primary bg-primary/5 text-primary shadow-sm font-extrabold'
+                        : 'border-gray-200 bg-white text-gray-500 hover:bg-gray-50'
+                    }`}
+                  >
+                    <span className="text-lg">📱</span>
+                    <span>Yape/Plin</span>
+                  </button>
+                </div>
+
                 <div className="flex justify-between items-center">
                   <h3 className="font-dish text-xl font-bold text-dark">Total a pagar</h3>
                   <h3 className="font-dish text-xl font-bold text-primary">S/.{calculateTotal().toFixed(2)}</h3>
