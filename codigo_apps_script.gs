@@ -26,7 +26,18 @@ function doPost(e) {
     const data = requestData.data;
     
     // Obtener la hoja activa
-    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    let ss = null;
+    try {
+      ss = SpreadsheetApp.getActiveSpreadsheet();
+    } catch (e) {
+      // Ignorar error si no está vinculado
+    }
+    
+    if (!ss) {
+      // Abrir por ID (tu ID de Google Sheet)
+      ss = SpreadsheetApp.openById('1TI-lJqw0Mz6dpPoyPsBTetQZ3GP1dDCTphnW8dGoozA');
+    }
+    
     let sheet = ss.getSheetByName(sheetName);
     
     // Si la hoja no existe, la creamos
