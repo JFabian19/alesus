@@ -195,6 +195,14 @@ export default function App() {
   const [showSummary, setShowSummary] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<string>('efectivo');
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  
+  // Checkout Form States
+  const [clientName, setClientName] = useState<string>('');
+  const [clientAddress, setClientAddress] = useState<string>('');
+  const [googleMapsUrl, setGoogleMapsUrl] = useState<string>('');
+  const [isGettingLocation, setIsGettingLocation] = useState<boolean>(false);
+  const [locationError, setLocationError] = useState<string>('');
+  const [yapeNumber, setYapeNumber] = useState<string>('');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedDish, setSelectedDish] = useState<Dish | null>(null);
 
@@ -378,7 +386,7 @@ export default function App() {
     );
   };
 
-  const calculateTotal = () => {
+  const calculateSubtotal = () => {
     return cart.reduce((acc, item) => {
       const cleanPrice = item.precio.replace(/^[^\d]*/, '');
       const num = parseFloat(cleanPrice) || 0;
@@ -386,19 +394,95 @@ export default function App() {
     }, 0);
   };
 
+  const calculateTapperCost = () => {
+    return cartCount * 1;
+  };
+
+  const calculateTotal = () => {
+    return calculateSubtotal() + calculateTapperCost();
+  };
+
+  const handleGetLocation = () => {
+    if (!navigator.geolocation) {
+      setLocationError("Tu navegador no soporta geolocalización.");
+      return;
+    }
+
+    setIsGettingLocation(true);
+    setLocationError("");
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        const mapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+        setGoogleMapsUrl(mapsUrl);
+        setIsGettingLocation(false);
+      },
+      (error) => {
+        console.error("Error getting geolocation:", error);
+        setIsGettingLocation(false);
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            setLocationError("Permiso denegado. Permite el acceso a tu ubicación precisa.");
+            break;
+          case error.POSITION_UNAVAILABLE:
+            setLocationError("Ubicación no disponible.");
+            break;
+          case error.TIMEOUT:
+            setLocationError("Tiempo de espera agotado.");
+            break;
+          default:
+            setLocationError("Error al obtener la ubicación.");
+            break;
+        }
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      }
+    );
+  };
+
   const sendToWhatsApp = () => {
+    if (!clientName.trim()) {
+      alert("Por favor, ingresa tu nombre completo.");
+      return;
+    }
+    if (!clientAddress.trim()) {
+      alert("Por favor, ingresa tu dirección de entrega.");
+      return;
+    }
+    if (paymentMethod === 'yape' && !yapeNumber.trim()) {
+      alert("Por favor, ingresa tu número de Yape.");
+      return;
+    }
+
+    const subtotal = calculateSubtotal();
+    const tapperCost = calculateTapperCost();
     const total = calculateTotal();
+
     let message = `*Hola ${RESTAURANTE_NAME}, deseo realizar un pedido:*\n\n`;
+    message += `*Cliente:* ${clientName.trim()}\n`;
+    message += `*Dirección:* ${clientAddress.trim()}\n`;
+    if (googleMapsUrl) {
+      message += `*Ubicación GPS:* ${googleMapsUrl}\n`;
+    }
+    message += `\n*Detalle del pedido:*\n`;
     cart.forEach(item => {
       message += `• ${item.cantidad} x ${item.nombre} (${item.precio})\n`;
     });
     
     let paymentLabel = 'Efectivo';
     if (paymentMethod === 'tarjeta') paymentLabel = 'Tarjeta Débito/Crédito';
-    if (paymentMethod === 'yape_plin') paymentLabel = 'Yape / Plin';
+    if (paymentMethod === 'yape') paymentLabel = `Yape (Celular: ${yapeNumber.trim()})`;
+    if (paymentMethod === 'plin') paymentLabel = 'Plin';
 
-    message += `\n*Método de Pago:* ${paymentLabel}`;
-    message += `\n*TOTAL: S/.${total.toFixed(2)}*`;
+    message += `\n*Método de Pago:* ${paymentLabel}\n`;
+    message += `\n*Subtotal platos:* S/.${subtotal.toFixed(2)}`;
+    message += `\n*Envases (tappers):* S/.${tapperCost.toFixed(2)}`;
+    message += `\n*TOTAL A PAGAR: S/.${total.toFixed(2)}*`;
+
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
   };
@@ -777,9 +861,68 @@ export default function App() {
                   </div>
                 ))}
               </div>
+              {/* Delivery Details Form */}
+              <div className="border-t border-dashed border-gray-200 pt-6 mb-6">
+                <h4 className="font-dish text-sm font-bold text-dark mb-4 text-left">Datos de entrega / Delivery:</h4>
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-[10px] font-bold text-gray-400 uppercase ml-1 block mb-1">Nombre Completo</label>
+                    <input 
+                      required 
+                      type="text" 
+                      value={clientName} 
+                      onChange={e => setClientName(e.target.value)} 
+                      className="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary/50 transition-colors" 
+                      placeholder="Ej. Juan Pérez" 
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-bold text-gray-400 uppercase ml-1 block mb-1">Dirección de Entrega</label>
+                    <input 
+                      required 
+                      type="text" 
+                      value={clientAddress} 
+                      onChange={e => setClientAddress(e.target.value)} 
+                      className="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary/50 transition-colors" 
+                      placeholder="Ej. Av. Larco 123, Dpto 402" 
+                    />
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      onClick={handleGetLocation}
+                      disabled={isGettingLocation}
+                      className="w-full bg-primary/10 text-primary py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 font-bold text-xs hover:bg-primary/15 transition-colors disabled:opacity-70"
+                    >
+                      {isGettingLocation ? (
+                        <>
+                          <Loader2 size={16} className="animate-spin" />
+                          <span>Obteniendo ubicación precisa...</span>
+                        </>
+                      ) : (
+                        <>
+                          <MapPin size={16} />
+                          <span>Encontrar mi ubicación exacta</span>
+                        </>
+                      )}
+                    </button>
+                    {googleMapsUrl && (
+                      <p className="text-[10px] text-green-600 font-semibold mt-1 text-center flex items-center justify-center gap-1">
+                        ✅ Ubicación precisa GPS obtenida exitosamente.
+                      </p>
+                    )}
+                    {locationError && (
+                      <p className="text-[10px] text-red-500 font-semibold mt-1 text-center">
+                        ❌ {locationError}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+
               <div className="border-t border-dashed border-gray-200 pt-6 mb-6">
                 <h4 className="font-dish text-sm font-bold text-dark mb-3 text-left">Método de pago:</h4>
-                <div className="grid grid-cols-3 gap-2 mb-6">
+                <div className="grid grid-cols-2 gap-2 mb-4">
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('efectivo')}
@@ -794,6 +937,30 @@ export default function App() {
                   </button>
                   <button
                     type="button"
+                    onClick={() => setPaymentMethod('yape')}
+                    className={`py-2.5 px-1 rounded-xl text-xs font-bold border transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
+                      paymentMethod === 'yape'
+                        ? 'border-primary bg-primary/5 text-primary shadow-sm font-extrabold'
+                        : 'border-gray-200 bg-white text-gray-500 hover:bg-gray-50'
+                    }`}
+                  >
+                    <span className="text-lg">📱</span>
+                    <span>Yape</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod('plin')}
+                    className={`py-2.5 px-1 rounded-xl text-xs font-bold border transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
+                      paymentMethod === 'plin'
+                        ? 'border-primary bg-primary/5 text-primary shadow-sm font-extrabold'
+                        : 'border-gray-200 bg-white text-gray-500 hover:bg-gray-50'
+                    }`}
+                  >
+                    <span className="text-lg">📱</span>
+                    <span>Plin</span>
+                  </button>
+                  <button
+                    type="button"
                     onClick={() => setPaymentMethod('tarjeta')}
                     className={`py-2.5 px-1 rounded-xl text-xs font-bold border transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
                       paymentMethod === 'tarjeta'
@@ -804,23 +971,54 @@ export default function App() {
                     <span className="text-lg">💳</span>
                     <span>Tarjeta</span>
                   </button>
-                  <button
-                    type="button"
-                    onClick={() => setPaymentMethod('yape_plin')}
-                    className={`py-2.5 px-1 rounded-xl text-xs font-bold border transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
-                      paymentMethod === 'yape_plin'
-                        ? 'border-primary bg-primary/5 text-primary shadow-sm font-extrabold'
-                        : 'border-gray-200 bg-white text-gray-500 hover:bg-gray-50'
-                    }`}
-                  >
-                    <span className="text-lg">📱</span>
-                    <span>Yape/Plin</span>
-                  </button>
                 </div>
 
-                <div className="flex justify-between items-center">
-                  <h3 className="font-dish text-xl font-bold text-dark">Total a pagar</h3>
-                  <h3 className="font-dish text-xl font-bold text-primary">S/.{calculateTotal().toFixed(2)}</h3>
+                {paymentMethod === 'yape' && (
+                  <div className="bg-purple-50 border border-purple-100 p-4 rounded-2xl mb-4 text-left">
+                    <p className="text-xs text-purple-700 font-semibold mb-2 flex items-center gap-1.5">
+                      <span>📱</span> Realiza tu Yape al número: <span className="font-bold text-purple-950">944 482 063</span> (Alesus Rest)
+                    </p>
+                    <label className="text-[10px] font-bold text-purple-600 uppercase ml-1 block mb-1">
+                      Tu número de celular Yape
+                    </label>
+                    <input 
+                      required 
+                      type="tel" 
+                      minLength={9} 
+                      maxLength={9} 
+                      pattern="[0-9]*" 
+                      value={yapeNumber} 
+                      onChange={e => {
+                        const val = e.target.value.replace(/\D/g, '');
+                        setYapeNumber(val);
+                      }} 
+                      className="w-full bg-white border border-purple-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-purple-500 transition-colors" 
+                      placeholder="Ej. 987654321" 
+                    />
+                  </div>
+                )}
+
+                {paymentMethod === 'plin' && (
+                  <div className="bg-teal-50 border border-teal-100 p-4 rounded-2xl mb-4 text-left">
+                    <p className="text-xs text-teal-700 font-semibold flex items-center gap-1.5">
+                      <span>📱</span> Realiza tu Plin al número: <span className="font-bold text-teal-950">944 482 063</span> (Alesus Rest)
+                    </p>
+                  </div>
+                )}
+
+                <div className="space-y-1.5 border-t border-gray-100 pt-4 mb-4">
+                  <div className="flex justify-between items-center text-xs text-gray-500">
+                    <span>Subtotal platos:</span>
+                    <span>S/.{calculateSubtotal().toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs text-gray-500">
+                    <span>Envases (tappers):</span>
+                    <span>S/.{calculateTapperCost().toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between items-center pt-2 border-t border-dashed border-gray-200">
+                    <h3 className="font-dish text-base font-bold text-dark">Total a pagar</h3>
+                    <h3 className="font-dish text-lg font-bold text-primary">S/.{calculateTotal().toFixed(2)}</h3>
+                  </div>
                 </div>
               </div>
               <button
