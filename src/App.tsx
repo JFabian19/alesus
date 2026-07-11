@@ -202,7 +202,7 @@ export default function App() {
   const [googleMapsUrl, setGoogleMapsUrl] = useState<string>('');
   const [isGettingLocation, setIsGettingLocation] = useState<boolean>(false);
   const [locationError, setLocationError] = useState<string>('');
-  const [yapeNumber, setYapeNumber] = useState<string>('');
+  const [copied, setCopied] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedDish, setSelectedDish] = useState<Dish | null>(null);
 
@@ -453,10 +453,6 @@ export default function App() {
       alert("Por favor, ingresa tu dirección de entrega.");
       return;
     }
-    if (paymentMethod === 'yape' && !yapeNumber.trim()) {
-      alert("Por favor, ingresa tu número de Yape.");
-      return;
-    }
 
     const subtotal = calculateSubtotal();
     const tapperCost = calculateTapperCost();
@@ -475,8 +471,7 @@ export default function App() {
     
     let paymentLabel = 'Efectivo';
     if (paymentMethod === 'tarjeta') paymentLabel = 'Tarjeta Débito/Crédito';
-    if (paymentMethod === 'yape') paymentLabel = `Yape (Celular: ${yapeNumber.trim()})`;
-    if (paymentMethod === 'plin') paymentLabel = 'Plin';
+    if (paymentMethod === 'yape_plin') paymentLabel = 'Yape / Plin';
 
     message += `\n*Método de Pago:* ${paymentLabel}\n`;
     message += `\n*Subtotal platos:* S/.${subtotal.toFixed(2)}`;
@@ -922,7 +917,7 @@ export default function App() {
 
               <div className="border-t border-dashed border-gray-200 pt-6 mb-6">
                 <h4 className="font-dish text-sm font-bold text-dark mb-3 text-left">Método de pago:</h4>
-                <div className="grid grid-cols-2 gap-2 mb-4">
+                <div className="grid grid-cols-3 gap-2 mb-6">
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('efectivo')}
@@ -937,27 +932,15 @@ export default function App() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => setPaymentMethod('yape')}
+                    onClick={() => setPaymentMethod('yape_plin')}
                     className={`py-2.5 px-1 rounded-xl text-xs font-bold border transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
-                      paymentMethod === 'yape'
+                      paymentMethod === 'yape_plin'
                         ? 'border-primary bg-primary/5 text-primary shadow-sm font-extrabold'
                         : 'border-gray-200 bg-white text-gray-500 hover:bg-gray-50'
                     }`}
                   >
                     <span className="text-lg">📱</span>
-                    <span>Yape</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setPaymentMethod('plin')}
-                    className={`py-2.5 px-1 rounded-xl text-xs font-bold border transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
-                      paymentMethod === 'plin'
-                        ? 'border-primary bg-primary/5 text-primary shadow-sm font-extrabold'
-                        : 'border-gray-200 bg-white text-gray-500 hover:bg-gray-50'
-                    }`}
-                  >
-                    <span className="text-lg">📱</span>
-                    <span>Plin</span>
+                    <span>Yape/Plin</span>
                   </button>
                   <button
                     type="button"
@@ -973,35 +956,27 @@ export default function App() {
                   </button>
                 </div>
 
-                {paymentMethod === 'yape' && (
+                {paymentMethod === 'yape_plin' && (
                   <div className="bg-purple-50 border border-purple-100 p-4 rounded-2xl mb-4 text-left">
-                    <p className="text-xs text-purple-700 font-semibold mb-2 flex items-center gap-1.5">
-                      <span>📱</span> Realiza tu Yape al número: <span className="font-bold text-purple-950">944 482 063</span> (Alesus Rest)
+                    <p className="text-xs text-purple-700 font-semibold mb-2">
+                      Realiza tu Yape o Plin al número:
                     </p>
-                    <label className="text-[10px] font-bold text-purple-600 uppercase ml-1 block mb-1">
-                      Tu número de celular Yape
-                    </label>
-                    <input 
-                      required 
-                      type="tel" 
-                      minLength={9} 
-                      maxLength={9} 
-                      pattern="[0-9]*" 
-                      value={yapeNumber} 
-                      onChange={e => {
-                        const val = e.target.value.replace(/\D/g, '');
-                        setYapeNumber(val);
-                      }} 
-                      className="w-full bg-white border border-purple-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-purple-500 transition-colors" 
-                      placeholder="Ej. 987654321" 
-                    />
-                  </div>
-                )}
-
-                {paymentMethod === 'plin' && (
-                  <div className="bg-teal-50 border border-teal-100 p-4 rounded-2xl mb-4 text-left">
-                    <p className="text-xs text-teal-700 font-semibold flex items-center gap-1.5">
-                      <span>📱</span> Realiza tu Plin al número: <span className="font-bold text-teal-950">944 482 063</span> (Alesus Rest)
+                    <div className="flex items-center justify-between bg-white border border-purple-200 rounded-xl px-4 py-2.5 mb-3">
+                      <span className="font-bold text-base text-purple-950">944482063</span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          navigator.clipboard.writeText("944482063");
+                          setCopied(true);
+                          setTimeout(() => setCopied(false), 2000);
+                        }}
+                        className="bg-primary text-white text-xs font-bold py-1.5 px-3 rounded-lg transition-colors flex items-center gap-1 cursor-pointer"
+                      >
+                        {copied ? "¡Copiado! ✓" : "Copiar"}
+                      </button>
+                    </div>
+                    <p className="text-[10px] text-purple-500 font-medium">
+                      Puedes hacer tu Yape o Plin a este número haciendo clic para copiar.
                     </p>
                   </div>
                 )}
