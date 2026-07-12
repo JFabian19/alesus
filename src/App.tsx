@@ -11,7 +11,7 @@ const RESTAURANTE_NAME = "Alesus Rest - Cevicheria";
 const RESTAURANTE_SLOGAN = "Comida criolla y marina con un toque gourmet y mucho corazón";
 const WHATSAPP_NUMBER = "51944482063"; // Reemplaza con tu número de WhatsApp con código de país (ej: 51 para Perú)
 const FACEBOOK_URL = "";
-const MAPS_URL = "https://maps.app.goo.gl/eARfD9Xne6u6rkqt7";
+const MAPS_URL = "https://www.google.com/maps/place/ALESUS/@-11.9890532,-77.0139224,14.07z/data=!4m6!3m5!1s0x9105c50046b458bb:0x9667530c92b272cc!8m2!3d-11.9984878!4d-77.0089329!16s%2Fg%2F11y4_lmyty!5m1!1e1?entry=ttu&g_ep=EgoyMDI2MDcwNi4wIKXMDSoASAFQAw%3D%3D";
 const LOGO_FOOTER_PATH = ""; // Reemplaza con la ruta de tu logo en public/ (ej: /logo.png)
 const BANNER_PATH = ""; // Reemplaza con la ruta de tu banner en public/ (ej: /banner.png)
 const MARQUEE_TEXT = "🌊 LA FRESCURA DEL MAR EN CADA PLATO • 🇵🇪 TRADICIÓN CRIOLLA Y TOQUE GOURMET • ¡VIVE LA EXPERIENCIA ALESUS! 🍤🍷 • ";
@@ -193,7 +193,16 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [showSummary, setShowSummary] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<string>('efectivo');
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  
+  // Checkout Form States
+  const [clientName, setClientName] = useState<string>('');
+  const [clientAddress, setClientAddress] = useState<string>('');
+  const [googleMapsUrl, setGoogleMapsUrl] = useState<string>('');
+  const [isGettingLocation, setIsGettingLocation] = useState<boolean>(false);
+  const [locationError, setLocationError] = useState<string>('');
+  const [copied, setCopied] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedDish, setSelectedDish] = useState<Dish | null>(null);
 
@@ -401,7 +410,7 @@ export default function App() {
     );
   };
 
-  const calculateTotal = () => {
+  const calculateSubtotal = () => {
     return cart.reduce((acc, item) => {
       const cleanPrice = item.precio.replace(/^[^\d]*/, '');
       const num = parseFloat(cleanPrice) || 0;
@@ -409,13 +418,90 @@ export default function App() {
     }, 0);
   };
 
+  const calculateTapperCost = () => {
+    return cartCount * 1;
+  };
+
+  const calculateTotal = () => {
+    return calculateSubtotal() + calculateTapperCost();
+  };
+
+  const handleGetLocation = () => {
+    if (!navigator.geolocation) {
+      setLocationError("Tu navegador no soporta geolocalización.");
+      return;
+    }
+
+    setIsGettingLocation(true);
+    setLocationError("");
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        const mapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+        setGoogleMapsUrl(mapsUrl);
+        setIsGettingLocation(false);
+      },
+      (error) => {
+        console.error("Error getting geolocation:", error);
+        setIsGettingLocation(false);
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            setLocationError("Permiso denegado. Permite el acceso a tu ubicación precisa.");
+            break;
+          case error.POSITION_UNAVAILABLE:
+            setLocationError("Ubicación no disponible.");
+            break;
+          case error.TIMEOUT:
+            setLocationError("Tiempo de espera agotado.");
+            break;
+          default:
+            setLocationError("Error al obtener la ubicación.");
+            break;
+        }
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      }
+    );
+  };
+
   const sendToWhatsApp = () => {
+    if (!clientName.trim()) {
+      alert("Por favor, ingresa tu nombre completo.");
+      return;
+    }
+    if (!clientAddress.trim()) {
+      alert("Por favor, ingresa tu dirección de entrega.");
+      return;
+    }
+
+    const subtotal = calculateSubtotal();
+    const tapperCost = calculateTapperCost();
     const total = calculateTotal();
+
     let message = `*Hola ${RESTAURANTE_NAME}, deseo realizar un pedido:*\n\n`;
+    message += `*Cliente:* ${clientName.trim()}\n`;
+    message += `*Dirección:* ${clientAddress.trim()}\n`;
+    if (googleMapsUrl) {
+      message += `*Ubicación GPS:* ${googleMapsUrl}\n`;
+    }
+    message += `\n*Detalle del pedido:*\n`;
     cart.forEach(item => {
       message += `• ${item.cantidad} x ${item.nombre} (${item.precio})\n`;
     });
-    message += `\n*TOTAL: S/.${total.toFixed(2)}*`;
+    
+    let paymentLabel = 'Efectivo';
+    if (paymentMethod === 'tarjeta') paymentLabel = 'Tarjeta Débito/Crédito';
+    if (paymentMethod === 'yape_plin') paymentLabel = 'Yape / Plin';
+
+    message += `\n*Método de Pago:* ${paymentLabel}\n`;
+    message += `\n*Subtotal platos:* S/.${subtotal.toFixed(2)}`;
+    message += `\n*Envases (tappers):* S/.${tapperCost.toFixed(2)}`;
+    message += `\n*TOTAL A PAGAR: S/.${total.toFixed(2)}*`;
+
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
   };
@@ -675,6 +761,20 @@ export default function App() {
           </motion.button>
         </section>
 
+        <section className="mt-2 mb-4 overflow-hidden border border-gray-100 bg-white rounded-3xl p-2 shadow-sm">
+          <div className="rounded-2xl overflow-hidden h-[250px] relative w-full">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29690.45323806844!2d-77.01392238135257!3d-11.989053213295936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c50046b458bb%3A0x9667530c92b272cc!2sALESUS!5e0!3m2!1ses!2spe!4v1783551070288!5m2!1ses!2spe" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen={true} 
+              loading="lazy" 
+              referrerPolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+        </section>
+
         <footer className="mt-8 pt-8 pb-10 border-t border-gray-200 flex flex-col items-center justify-center">
           <p className="font-title text-2xl text-primary mb-4">{RESTAURANTE_NAME}</p>
           <div className="w-32 h-32 mb-6 rounded-2xl flex items-center justify-center p-2">
@@ -780,10 +880,144 @@ export default function App() {
                   </div>
                 ))}
               </div>
-              <div className="border-t border-dashed border-gray-200 pt-6 mb-8">
-                <div className="flex justify-between items-center">
-                  <h3 className="font-dish text-xl font-bold text-dark">Total a pagar</h3>
-                  <h3 className="font-dish text-xl font-bold text-primary">S/.{calculateTotal().toFixed(2)}</h3>
+              {/* Delivery Details Form */}
+              <div className="border-t border-dashed border-gray-200 pt-6 mb-6">
+                <h4 className="font-dish text-sm font-bold text-dark mb-4 text-left">Datos de entrega / Delivery:</h4>
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-[10px] font-bold text-gray-400 uppercase ml-1 block mb-1">Nombre Completo</label>
+                    <input 
+                      required 
+                      type="text" 
+                      value={clientName} 
+                      onChange={e => setClientName(e.target.value)} 
+                      className="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary/50 transition-colors" 
+                      placeholder="Ej. Juan Pérez" 
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-bold text-gray-400 uppercase ml-1 block mb-1">Dirección de Entrega</label>
+                    <input 
+                      required 
+                      type="text" 
+                      value={clientAddress} 
+                      onChange={e => setClientAddress(e.target.value)} 
+                      className="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary/50 transition-colors" 
+                      placeholder="Ej. Av. Larco 123, Dpto 402" 
+                    />
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      onClick={handleGetLocation}
+                      disabled={isGettingLocation}
+                      className="w-full bg-primary/10 text-primary py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 font-bold text-xs hover:bg-primary/15 transition-colors disabled:opacity-70"
+                    >
+                      {isGettingLocation ? (
+                        <>
+                          <Loader2 size={16} className="animate-spin" />
+                          <span>Obteniendo ubicación precisa...</span>
+                        </>
+                      ) : (
+                        <>
+                          <MapPin size={16} />
+                          <span>Encontrar mi ubicación exacta</span>
+                        </>
+                      )}
+                    </button>
+                    {googleMapsUrl && (
+                      <p className="text-[10px] text-green-600 font-semibold mt-1 text-center flex items-center justify-center gap-1">
+                        ✅ Ubicación precisa GPS obtenida exitosamente.
+                      </p>
+                    )}
+                    {locationError && (
+                      <p className="text-[10px] text-red-500 font-semibold mt-1 text-center">
+                        ❌ {locationError}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-t border-dashed border-gray-200 pt-6 mb-6">
+                <h4 className="font-dish text-sm font-bold text-dark mb-3 text-left">Método de pago:</h4>
+                <div className="grid grid-cols-3 gap-2 mb-6">
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod('efectivo')}
+                    className={`py-2.5 px-1 rounded-xl text-xs font-bold border transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
+                      paymentMethod === 'efectivo'
+                        ? 'border-primary bg-primary/5 text-primary shadow-sm font-extrabold'
+                        : 'border-gray-200 bg-white text-gray-500 hover:bg-gray-50'
+                    }`}
+                  >
+                    <span className="text-lg">💵</span>
+                    <span>Efectivo</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod('yape_plin')}
+                    className={`py-2.5 px-1 rounded-xl text-xs font-bold border transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
+                      paymentMethod === 'yape_plin'
+                        ? 'border-primary bg-primary/5 text-primary shadow-sm font-extrabold'
+                        : 'border-gray-200 bg-white text-gray-500 hover:bg-gray-50'
+                    }`}
+                  >
+                    <span className="text-lg">📱</span>
+                    <span>Yape/Plin</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod('tarjeta')}
+                    className={`py-2.5 px-1 rounded-xl text-xs font-bold border transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
+                      paymentMethod === 'tarjeta'
+                        ? 'border-primary bg-primary/5 text-primary shadow-sm font-extrabold'
+                        : 'border-gray-200 bg-white text-gray-500 hover:bg-gray-50'
+                    }`}
+                  >
+                    <span className="text-lg">💳</span>
+                    <span>Tarjeta</span>
+                  </button>
+                </div>
+
+                {paymentMethod === 'yape_plin' && (
+                  <div className="bg-purple-50 border border-purple-100 p-4 rounded-2xl mb-4 text-left">
+                    <p className="text-xs text-purple-700 font-semibold mb-2">
+                      Realiza tu Yape o Plin al número:
+                    </p>
+                    <div className="flex items-center justify-between bg-white border border-purple-200 rounded-xl px-4 py-2.5 mb-3">
+                      <span className="font-bold text-base text-purple-950">944482063</span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          navigator.clipboard.writeText("944482063");
+                          setCopied(true);
+                          setTimeout(() => setCopied(false), 2000);
+                        }}
+                        className="bg-primary text-white text-xs font-bold py-1.5 px-3 rounded-lg transition-colors flex items-center gap-1 cursor-pointer"
+                      >
+                        {copied ? "¡Copiado! ✓" : "Copiar"}
+                      </button>
+                    </div>
+                    <p className="text-[10px] text-purple-500 font-medium">
+                      Puedes hacer tu Yape o Plin a este número haciendo clic para copiar.
+                    </p>
+                  </div>
+                )}
+
+                <div className="space-y-1.5 border-t border-gray-100 pt-4 mb-4">
+                  <div className="flex justify-between items-center text-xs text-gray-500">
+                    <span>Subtotal platos:</span>
+                    <span>S/.{calculateSubtotal().toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs text-gray-500">
+                    <span>Envases (tappers):</span>
+                    <span>S/.{calculateTapperCost().toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between items-center pt-2 border-t border-dashed border-gray-200">
+                    <h3 className="font-dish text-base font-bold text-dark">Total a pagar</h3>
+                    <h3 className="font-dish text-lg font-bold text-primary">S/.{calculateTotal().toFixed(2)}</h3>
+                  </div>
                 </div>
               </div>
               <button
