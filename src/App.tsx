@@ -256,22 +256,46 @@ export default function App() {
           return;
         }
 
-        const formattedCategories: Category[] = cats.map(c => ({
-          id: c.categorías.toLowerCase().replace(/\s+/g, '-'),
-          nombre: c.categorías,
-          items: dishes
-            .filter(d => d.categoría === c.categorías)
-            .map(d => ({
-              nombre: d['nombre del plato'],
-              descripcion: d.descripción,
-              precio: d.precio,
-              imagen: LOCAL_IMAGES[d['nombre del plato']] || 
-                      LOCAL_IMAGES[d['nombre del plato'].trim()] || 
-                      LOCAL_IMAGES[d['nombre del plato'].toLowerCase().trim()] || 
-                      d['URL de imagen'] || 
-                      null
-            }))
-        }));
+        const formattedCategories: Category[] = cats
+          .map(c => {
+            const catName = (c as any).categorías || (c as any).Categorías || (c as any).categoría || (c as any).Categoría || (c as any).nombre || (c as any).Nombre || '';
+            if (!catName) return null;
+            return {
+              id: catName.toLowerCase().replace(/\s+/g, '-'),
+              nombre: catName,
+              items: dishes
+                .filter(d => {
+                  const dCat = d.categoría || (d as any).Categoría || (d as any).categorías || (d as any).Categorías || (d as any).categoria || (d as any).Categoria || '';
+                  return dCat === catName;
+                })
+                .map(d => {
+                  const name = d['nombre del plato'] || (d as any)['Nombre del plato'] || (d as any).nombre || (d as any).Nombre || '';
+                  const desc = d.descripción || (d as any).Descripción || (d as any).descripcion || (d as any).Descripcion || '';
+                  const price = d.precio || (d as any).Precio || '';
+                  
+                  // Buscar la imagen local por defecto si no viene de la hoja de cálculo
+                  const defaultDish = DEFAULT_MENU_DATA
+                    .flatMap(cat => cat.items)
+                    .find(item => item.nombre.toLowerCase().trim() === name.toLowerCase().trim());
+                  const defaultImg = defaultDish?.imagen || '';
+                  
+                  const sheetImg = d['URL de imagen'] || (d as any)['url de imagen'] || (d as any)['URL de Imagen'] || (d as any)['imagen URL'] || (d as any)['Imagen URL'] || '';
+                  
+                  return {
+                    nombre: name,
+                    descripcion: desc,
+                    precio: price,
+                    imagen: LOCAL_IMAGES[name] || 
+                            LOCAL_IMAGES[name.trim()] || 
+                            LOCAL_IMAGES[name.toLowerCase().trim()] || 
+                            sheetImg || 
+                            defaultImg || 
+                            null
+                  };
+                })
+            };
+          })
+          .filter(Boolean) as Category[];
 
         setCategories(formattedCategories);
         if (formattedCategories.length > 0) {

@@ -67,27 +67,32 @@ export const DEFAULT_MENU_DATA: Category[] = [
       {
         nombre: "Al natural",
         descripcion: "Láminas de pescado bañadas en suave crema de limón.",
-        precio: "S/ 35.00"
+        precio: "S/ 35.00",
+        imagen: "/al_natural.png"
       },
       {
         nombre: "Al ají amarillo",
         descripcion: "Láminas de pescado bañadas en suave crema de ají amarillo.",
-        precio: "S/ 38.00"
+        precio: "S/ 38.00",
+        imagen: "/al_aji_amarillo.png"
       },
       {
         nombre: "Al rocoto",
         descripcion: "Láminas de pescado bañadas en suave crema de rocoto.",
-        precio: "S/ 38.00"
+        precio: "S/ 38.00",
+        imagen: "/al_rocoto.png"
       },
       {
         nombre: "Bicolor",
         descripcion: "Láminas de pescado bañadas en crema de ají amarillo y rocoto.",
-        precio: "S/ 38.00"
+        precio: "S/ 38.00",
+        imagen: "/bicolor.png"
       },
       {
         nombre: "Tres sabores",
         descripcion: "Láminas de pescado bañadas en crema de ají amarillo, rocoto y crema de olivo.",
-        precio: "S/ 40.00"
+        precio: "S/ 40.00",
+        imagen: "/tres_sabores.png"
       }
     ]
   },
@@ -99,32 +104,38 @@ export const DEFAULT_MENU_DATA: Category[] = [
       {
         nombre: "Chicharrón de Pescado",
         descripcion: "Crujientes trozos de pescado, yucas fritas y salsa criolla.",
-        precio: "S/ 35.00"
+        precio: "S/ 35.00",
+        imagen: "/chicharron_pescado.jpg"
       },
       {
         nombre: "Chicharrón de Calamar",
         descripcion: "Aros de calamar crujientes, yucas fritas y salsa criolla.",
-        precio: "S/ 40.00"
+        precio: "S/ 40.00",
+        imagen: "/chicharron_calamar.png"
       },
       {
         nombre: "Chicharrón de Pulpo",
         descripcion: "Trozos de pulpo crujientes, yucas fritas y salsa criolla.",
-        precio: "S/ 45.00"
+        precio: "S/ 45.00",
+        imagen: "/chicharron_pulpo.png"
       },
       {
         nombre: "Chicharrón Mixto",
         descripcion: "Crujientes trozos de pescado y mariscos, yucas fritas y salsa criolla.",
-        precio: "S/ 40.00"
+        precio: "S/ 40.00",
+        imagen: "/chicharron_mixto.png"
       },
       {
         nombre: "Jalea Mixta",
         descripcion: "Pescado y mariscos crocantes, yucas fritas, chifles y salsa criolla.",
-        precio: "S/ 45.00"
+        precio: "S/ 45.00",
+        imagen: "/jalea_mixta.jpg"
       },
       {
         nombre: "Jalea de Pescado",
         descripcion: "Pescado crocante, yucas fritas, chifles y salsa criolla.",
-        precio: "S/ 40.00"
+        precio: "S/ 40.00",
+        imagen: "/jalea_pescado.png"
       }
     ]
   },
@@ -154,27 +165,32 @@ export const DEFAULT_MENU_DATA: Category[] = [
       {
         nombre: "Trío Marino",
         descripcion: "Ceviche de pescado + chicharrón de pescado + arroz con mariscos.",
-        precio: "S/ 48.00"
+        precio: "S/ 48.00",
+        imagen: "/trio_marino.jpg"
       },
       {
         nombre: "Trío Alesus",
         descripcion: "Ceviche mixto + chicharrón de calamar + chaufa de mariscos.",
-        precio: "S/ 50.00"
+        precio: "S/ 50.00",
+        imagen: "/trio_alesus.jpg"
       },
       {
         nombre: "Trío Caliente",
-        descripcion: "Arroz con mariscos, chicharrón mixto y picante de mariscos.",
-        precio: "S/ 48.00"
+        descripcion: "Arroz con mariscos, chicharrón mixto and picante de mariscos.",
+        precio: "S/ 48.00",
+        imagen: "/trio_caliente.png"
       },
       {
         nombre: "Trío Huachano",
         descripcion: "Ceviche de pescado + arroz con pato + huancaína.",
-        precio: "S/ 45.00"
+        precio: "S/ 45.00",
+        imagen: "/trio_huachano.png"
       },
       {
         nombre: "Trío Norteño",
         descripcion: "Ceviche de pescado + seco de cabrito + frijoles.",
-        precio: "S/ 45.00"
+        precio: "S/ 45.00",
+        imagen: "/trio_norteno.png"
       }
     ]
   },
@@ -185,42 +201,50 @@ export const DEFAULT_MENU_DATA: Category[] = [
       {
         nombre: "Combinado de Pescado",
         descripcion: "Ceviche de pescado + chicharrón de pescado.",
-        precio: "S/ 35.00"
+        precio: "S/ 35.00",
+        imagen: "/combinado_pescado.png"
       },
       {
         nombre: "Combinado Mixto",
         descripcion: "Ceviche mixto + chicharrón mixto.",
-        precio: "S/ 38.00"
+        precio: "S/ 38.00",
+        imagen: "/combinado_mixto.png"
       },
       {
         nombre: "Combinado Especial",
         descripcion: "Ceviche de pescado + chicharrón de calamar.",
-        precio: "S/ 40.00"
+        precio: "S/ 40.00",
+        imagen: "/combinado_especial.png"
       },
       {
         nombre: "Arroz con mariscos + ceviche",
         descripcion: "Dúo perfecto de arroz con mariscos y ceviche fresco.",
-        precio: "S/ 40.00"
+        precio: "S/ 40.00",
+        imagen: "/arroz_mariscos_ceviche.png"
       },
       {
         nombre: "Chaufa de pescado + ceviche",
         descripcion: "Fusión oriental de chaufa de pescado con ceviche fresco.",
-        precio: "S/ 38.00"
+        precio: "S/ 38.00",
+        imagen: "/chaufa_pescado_ceviche.png"
       },
       {
         nombre: "Chaufa de mariscos + ceviche",
         descripcion: "Clásico chaufa de mariscos acompañado de ceviche.",
-        precio: "S/ 40.00"
+        precio: "S/ 40.00",
+        imagen: "/chaufa_mariscos_ceviche.png"
       },
       {
         nombre: "Arroz con mariscos + chicharrón",
         descripcion: "Combinación caliente y crocante de arroz con mariscos y chicharrón.",
-        precio: "S/ 40.00"
+        precio: "S/ 40.00",
+        imagen: "/arroz_mariscos_chicharron.png"
       },
       {
         nombre: "Chaufa de mariscos + chicharrón",
         descripcion: "Chaufa de mariscos acompañado de crocante chicharrón.",
-        precio: "S/ 40.00"
+        precio: "S/ 40.00",
+        imagen: "/chaufa_mariscos_chicharron.png"
       }
     ]
   },
@@ -231,27 +255,32 @@ export const DEFAULT_MENU_DATA: Category[] = [
       {
         nombre: "Chicharrón de pescado",
         descripcion: "Acompañado de papas fritas.",
-        precio: "S/ 20.00"
+        precio: "S/ 20.00",
+        imagen: "/chicharron_pescado_ninos.png"
       },
       {
         nombre: "Chicharrón de pollo",
         descripcion: "Acompañado de papas fritas.",
-        precio: "S/ 18.00"
+        precio: "S/ 18.00",
+        imagen: "/chicharron_pollo.png"
       },
       {
         nombre: "Milanesa de pollo",
         descripcion: "Acompañado de papas fritas.",
-        precio: "S/ 18.00"
+        precio: "S/ 18.00",
+        imagen: "/milanesa_pollo.png"
       },
       {
         nombre: "Salchipapa",
         descripcion: "Clásica salchipapa para niños.",
-        precio: "S/ 15.00"
+        precio: "S/ 15.00",
+        imagen: "/salchipapa.png"
       },
       {
         nombre: "Tallarines en salsa Alfredo",
         descripcion: "Pasta cremosa y suave, ideal para los pequeños.",
-        precio: "S/ 20.00"
+        precio: "S/ 20.00",
+        imagen: "/tallarines_alfredo.png"
       }
     ]
   },
@@ -262,17 +291,20 @@ export const DEFAULT_MENU_DATA: Category[] = [
       {
         nombre: "Tortilla de Mariscos",
         descripcion: "Jugosa tortilla de mariscos de temporada.",
-        precio: "S/ 30.00"
+        precio: "S/ 30.00",
+        imagen: "/tortilla_mariscos.png"
       },
       {
         nombre: "Tortilla de Langostinos",
         descripcion: "Jugosa tortilla a base de langostinos frescos.",
-        precio: "S/ 35.00"
+        precio: "S/ 35.00",
+        imagen: "/tortilla_langostinos.png"
       },
       {
         nombre: "Tortilla de Verduras",
         descripcion: "Jugosa tortilla a base de verduras frescas.",
-        precio: "S/ 20.00"
+        precio: "S/ 20.00",
+        imagen: "/tortilla_verduras.png"
       }
     ]
   },
@@ -427,32 +459,38 @@ export const DEFAULT_MENU_DATA: Category[] = [
       {
         nombre: "Porción de Arroz",
         descripcion: "Porción de arroz blanco.",
-        precio: "S/ 5.00"
+        precio: "S/ 5.00",
+        imagen: "/porcion_arroz.png"
       },
       {
         nombre: "Porción de Yuca",
         descripcion: "Porción de yucas fritas o sancochadas.",
-        precio: "S/ 6.00"
+        precio: "S/ 6.00",
+        imagen: "/porcion_yuca.png"
       },
       {
         nombre: "Porción de Camote",
         descripcion: "Porción de camote glaseado.",
-        precio: "S/ 5.00"
+        precio: "S/ 5.00",
+        imagen: "/porcion_camote.png"
       },
       {
         nombre: "Porción de Papas Fritas",
         descripcion: "Porción de papas fritas crocantes.",
-        precio: "S/ 8.00"
+        precio: "S/ 8.00",
+        imagen: "/porcion_papas.png"
       },
       {
         nombre: "Porción de Chifles",
         descripcion: "Porción de chifles norteños.",
-        precio: "S/ 5.00"
+        precio: "S/ 5.00",
+        imagen: "/porcion_chifles.png"
       },
       {
         nombre: "Porción de Cancha",
         descripcion: "Canchita serrana tostada.",
-        precio: "S/ 4.00"
+        precio: "S/ 4.00",
+        imagen: "/porcion_cancha.png"
       }
     ]
   },
@@ -463,22 +501,26 @@ export const DEFAULT_MENU_DATA: Category[] = [
       {
         nombre: "Inka Cola / Coca Cola / Sprite / Fanta 500ml",
         descripcion: "Gaseosa presentación de medio litro.",
-        precio: "S/ 5.00"
+        precio: "S/ 5.00",
+        imagen: "/gaseosa_500ml.png"
       },
       {
         nombre: "Gaseosa Gordita",
         descripcion: "Gaseosa presentación gordita.",
-        precio: "S/ 3.50"
+        precio: "S/ 3.50",
+        imagen: "/gaseosa_gordita.png"
       },
       {
         nombre: "Gaseosa Personal",
         descripcion: "Gaseosa presentación personal pequeña.",
-        precio: "S/ 2.50"
+        precio: "S/ 2.50",
+        imagen: "/gaseosa_personal.png"
       },
       {
         nombre: "Agua Mineral",
         descripcion: "Botella de agua mineral de mesa.",
-        precio: "S/ 3.00"
+        precio: "S/ 3.00",
+        imagen: "/agua_mineral.png"
       }
     ]
   },
@@ -489,17 +531,20 @@ export const DEFAULT_MENU_DATA: Category[] = [
       {
         nombre: "Limonada / Chicha Morada / Maracuyá / Chicha de Jora (Jarra)",
         descripcion: "Jarra entera de refresco natural.",
-        precio: "S/ 15.00"
+        precio: "S/ 15.00",
+        imagen: "/refrescos_jarra.png"
       },
       {
         nombre: "Limonada / Chicha Morada / Maracuyá / Chicha de Jora (1/2 Jarra)",
         descripcion: "Media jarra de refresco natural.",
-        precio: "S/ 8.00"
+        precio: "S/ 8.00",
+        imagen: "/refrescos_media_jarra.png"
       },
       {
         nombre: "Limonada / Chicha Morada / Maracuyá / Chicha de Jora (Vaso)",
         descripcion: "Vaso personal de refresco natural.",
-        precio: "S/ 3.00"
+        precio: "S/ 3.00",
+        imagen: "/refrescos_vaso.png"
       }
     ]
   },
@@ -510,12 +555,14 @@ export const DEFAULT_MENU_DATA: Category[] = [
       {
         nombre: "Infusiones",
         descripcion: "Té, anís, manzanilla.",
-        precio: "S/ 3.00"
+        precio: "S/ 3.00",
+        imagen: "/infusiones.png"
       },
       {
         nombre: "Café Pasado",
         descripcion: "Taza de café pasado caliente.",
-        precio: "S/ 5.00"
+        precio: "S/ 5.00",
+        imagen: "/cafe_pasado.png"
       }
     ]
   },
@@ -526,32 +573,38 @@ export const DEFAULT_MENU_DATA: Category[] = [
       {
         nombre: "Pilsen",
         descripcion: "Cerveza tradicional helada.",
-        precio: "S/ 8.00"
+        precio: "S/ 8.00",
+        imagen: "/pilsen.png"
       },
       {
         nombre: "Cristal",
         descripcion: "Cerveza tradicional helada.",
-        precio: "S/ 8.00"
+        precio: "S/ 8.00",
+        imagen: "/cristal.png"
       },
       {
         nombre: "Cusqueña",
         descripcion: "Cerveza premium peruana.",
-        precio: "S/ 10.00"
+        precio: "S/ 10.00",
+        imagen: "/cusquena.png"
       },
       {
         nombre: "Corona",
         descripcion: "Cerveza importada helada.",
-        precio: "S/ 10.00"
+        precio: "S/ 10.00",
+        imagen: "/corona.png"
       },
       {
         nombre: "Stella Artois",
         descripcion: "Cerveza premium importada.",
-        precio: "S/ 10.00"
+        precio: "S/ 10.00",
+        imagen: "/stella_artois.png"
       },
       {
         nombre: "Heineken",
         descripcion: "Cerveza premium importada.",
-        precio: "S/ 10.00"
+        precio: "S/ 10.00",
+        imagen: "/heineken.png"
       }
     ]
   },
@@ -562,27 +615,32 @@ export const DEFAULT_MENU_DATA: Category[] = [
       {
         nombre: "Santiago Queirolo",
         descripcion: "Botella de vino Santiago Queirolo.",
-        precio: "S/ 35.00"
+        precio: "S/ 35.00",
+        imagen: "/santiago_queirolo.png"
       },
       {
         nombre: "Tabernero",
         descripcion: "Botella de vino Tabernero.",
-        precio: "S/ 35.00"
+        precio: "S/ 35.00",
+        imagen: "/tabernero.png"
       },
       {
         nombre: "Tacama",
         descripcion: "Botella de vino Tacama.",
-        precio: "S/ 45.00"
+        precio: "S/ 45.00",
+        imagen: "/tacama.png"
       },
       {
         nombre: "Casillero del Diablo",
         descripcion: "Botella de vino Casillero del Diablo.",
-        precio: "S/ 60.00"
+        precio: "S/ 60.00",
+        imagen: "/casillero_del_diablo.png"
       },
       {
         nombre: "Navarro Correas",
         descripcion: "Botella de vino Navarro Correas.",
-        precio: "S/ 50.00"
+        precio: "S/ 50.00",
+        imagen: "/navarro_correas.png"
       }
     ]
   },
@@ -593,47 +651,56 @@ export const DEFAULT_MENU_DATA: Category[] = [
       {
         nombre: "Pisco Sour",
         descripcion: "Cóctel tradicional a base de pisco.",
-        precio: "S/ 18.00"
+        precio: "S/ 18.00",
+        imagen: "/pisco_sour.png"
       },
       {
         nombre: "Maracuyá Sour",
         descripcion: "Exquisita variante de sour con maracuyá.",
-        precio: "S/ 18.00"
+        precio: "S/ 18.00",
+        imagen: "/maracuya_sour.png"
       },
       {
         nombre: "Chilcano Clásico",
         descripcion: "Refrescante trago de pisco y ginger ale.",
-        precio: "S/ 15.00"
+        precio: "S/ 15.00",
+        imagen: "/chilcano_clasico.png"
       },
       {
         nombre: "Chilcano de Maracuyá",
         descripcion: "Chilcano frutal y tropical con maracuyá.",
-        precio: "S/ 15.00"
+        precio: "S/ 15.00",
+        imagen: "/chilcano_maracuya.png"
       },
       {
         nombre: "Algarrobina",
         descripcion: "Cóctel dulce y cremoso a base de algarrobina.",
-        precio: "S/ 18.00"
+        precio: "S/ 18.00",
+        imagen: "/algarrobina.png"
       },
       {
         nombre: "Piña Colada",
         descripcion: "Clásico cóctel tropical de crema de coco y piña.",
-        precio: "S/ 18.00"
+        precio: "S/ 18.00",
+        imagen: "/pina_colada.png"
       },
       {
         nombre: "Machu Picchu",
         descripcion: "Cóctel colorido representativo peruano.",
-        precio: "S/ 20.00"
+        precio: "S/ 20.00",
+        imagen: "/machu_picchu.png"
       },
       {
         nombre: "Cuba Libre",
         descripcion: "Clásica combinación de ron y bebida de cola.",
-        precio: "S/ 15.00"
+        precio: "S/ 15.00",
+        imagen: "/cuba_libre.png"
       },
       {
         nombre: "Mojito",
         descripcion: "Cóctel muy refrescante a base de ron, limón y hierbabuena.",
-        precio: "S/ 18.00"
+        precio: "S/ 18.00",
+        imagen: "/mojito.png"
       }
     ]
   }
