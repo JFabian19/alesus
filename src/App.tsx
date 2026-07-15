@@ -682,6 +682,7 @@ export default function App() {
                       <img 
                         src={dish.imagen} 
                         alt={dish.nombre} 
+                        loading="lazy"
                         className="w-full h-full object-cover"
                       />
                     ) : (
@@ -756,7 +757,7 @@ export default function App() {
         <footer className="mt-8 pt-8 pb-10 border-t border-gray-200 flex flex-col items-center justify-center">
           <p className="font-title text-2xl text-primary mb-4">{RESTAURANTE_NAME}</p>
           <div className="w-32 h-32 mb-6 rounded-2xl flex items-center justify-center p-2">
-            <img src="/logo_alesus.png" alt="Alesus Logo" className="w-full h-full object-contain" />
+            <img src="/logo_alesus.png" alt="Alesus Logo" loading="lazy" className="w-full h-full object-contain" />
           </div>
           <p className="text-[11px] text-gray-400 font-medium">© 2026 Todos los derechos reservados.</p>
         </footer>
