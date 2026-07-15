@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { ShoppingBag, Plus, Minus, ChevronRight, X, Trash2, Utensils, Facebook, MapPin, Loader2, Gift, Star } from 'lucide-react';
+import { ShoppingBag, Plus, Minus, ChevronRight, X, Trash2, Utensils, Facebook, MapPin, Loader2, Gift, Star, AlertTriangle, Compass } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { fetchSheetData, submitSheetData, SheetDish, SheetCategory, SHEET_ID } from './services/googleSheets';
 import { DEFAULT_MENU_DATA } from './data/menuData';
@@ -198,6 +198,7 @@ export default function App() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   
   // Checkout Form States
+  const [deliveryMethod, setDeliveryMethod] = useState<'envio' | 'retiro'>('envio');
   const [clientName, setClientName] = useState<string>('');
   const [clientAddress, setClientAddress] = useState<string>('');
   const [googleMapsUrl, setGoogleMapsUrl] = useState<string>('');
@@ -474,7 +475,7 @@ export default function App() {
       alert("Por favor, ingresa tu nombre completo.");
       return;
     }
-    if (!clientAddress.trim()) {
+    if (deliveryMethod === 'envio' && !clientAddress.trim()) {
       alert("Por favor, ingresa tu dirección de entrega.");
       return;
     }
@@ -485,9 +486,12 @@ export default function App() {
 
     let message = `*Hola ${RESTAURANTE_NAME}, deseo realizar un pedido:*\n\n`;
     message += `*Cliente:* ${clientName.trim()}\n`;
-    message += `*Dirección:* ${clientAddress.trim()}\n`;
-    if (googleMapsUrl) {
-      message += `*Ubicación GPS:* ${googleMapsUrl}\n`;
+    message += `*Método de Entrega:* ${deliveryMethod === 'envio' ? 'Envío a domicilio' : 'Retiro en tienda'}\n`;
+    if (deliveryMethod === 'envio') {
+      message += `*Dirección:* ${clientAddress.trim()}\n`;
+      if (googleMapsUrl) {
+        message += `*Ubicación GPS:* ${googleMapsUrl}\n`;
+      }
     }
     message += `\n*Detalle del pedido:*\n`;
     cart.forEach(item => {
@@ -699,7 +703,7 @@ export default function App() {
                   key={idx}
                   whileHover={{ y: -4 }}
                   onClick={() => setSelectedDish(dish)}
-                  className="bg-white rounded-[2rem] overflow-hidden flex flex-col shadow-sm border border-gray-100 hover:border-primary/30 hover:shadow-md transition-all duration-200 cursor-pointer"
+                  className="group bg-white rounded-[2rem] overflow-hidden flex flex-col shadow-sm border border-gray-100 hover:border-primary/30 hover:shadow-md transition-all duration-200 cursor-pointer"
                 >
                   <div className="bg-primary/5 aspect-square flex items-center justify-center relative overflow-hidden border-b border-gray-100">
                     {dish.imagen ? (
@@ -707,7 +711,7 @@ export default function App() {
                         src={dish.imagen} 
                         alt={dish.nombre} 
                         loading="lazy"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     ) : (
                       <div className="flex flex-col items-center justify-center gap-1.5 p-4">
@@ -927,119 +931,179 @@ export default function App() {
               exit={{ y: "100%" }}
               className="bg-white w-full max-w-md rounded-t-[3rem] p-6 max-h-[85vh] overflow-y-auto"
             >
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="font-title text-2xl text-primary">Datos de Entrega</h2>
-                <button
-                  onClick={() => setShowCheckoutModal(false)}
-                  className="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center cursor-pointer"
-                >
-                  <X size={20} className="text-gray-400" />
-                </button>
+              <button
+                onClick={() => setShowCheckoutModal(false)}
+                className="absolute top-6 right-6 w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-100 transition-colors"
+              >
+                <X size={20} className="text-gray-400" />
+              </button>
+
+              <div className="flex flex-col items-center text-center mb-6 mt-2">
+                <div className="w-16 h-16 bg-amber-50/70 border border-amber-200/60 rounded-full flex items-center justify-center mb-3 text-secondary">
+                  <ShoppingBag size={28} />
+                </div>
+                <h2 className="font-title text-2xl text-dark font-bold leading-none mb-2">Finalizar Pedido</h2>
+                <p className="text-xs text-gray-500">Completa los detalles de tu entrega y pago.</p>
               </div>
 
-              <div className="space-y-4 text-left">
+              <div className="space-y-5 text-left">
                 <div>
-                  <label className="text-[10px] font-bold text-gray-400 uppercase ml-1 block mb-1">Nombre Completo</label>
+                  <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block mb-2">Tu Nombre</label>
                   <input 
                     required 
                     type="text" 
                     value={clientName} 
                     onChange={e => setClientName(e.target.value)} 
-                    className="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary/50 transition-colors" 
-                    placeholder="Ej. Juan Pérez" 
+                    className="w-full bg-white border border-gray-200 rounded-2xl px-5 py-3.5 text-sm focus:outline-none focus:border-primary/50 transition-colors placeholder:text-gray-300" 
+                    placeholder="Ej. Luis Pérez" 
                   />
                 </div>
-                <div>
-                  <label className="text-[10px] font-bold text-gray-400 uppercase ml-1 block mb-1">Dirección de Entrega</label>
-                  <input 
-                    required 
-                    type="text" 
-                    value={clientAddress} 
-                    onChange={e => setClientAddress(e.target.value)} 
-                    className="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary/50 transition-colors" 
-                    placeholder="Ej. Av. Larco 123, Dpto 402" 
-                  />
-                </div>
-                <div>
-                  <button
-                    type="button"
-                    onClick={handleGetLocation}
-                    disabled={isGettingLocation}
-                    className="w-full bg-primary/10 text-primary py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 font-bold text-xs hover:bg-primary/15 transition-colors disabled:opacity-70 cursor-pointer"
-                  >
-                    {isGettingLocation ? (
-                      <>
-                        <Loader2 size={16} className="animate-spin" />
-                        <span>Obteniendo ubicación precisa...</span>
-                      </>
-                    ) : (
-                      <>
-                        <MapPin size={16} />
-                        <span>Obtener ubicación por GPS</span>
-                      </>
-                    )}
-                  </button>
 
-                  <div className="mt-2 bg-amber-50 border border-amber-100 rounded-xl p-3 text-[11px] text-amber-800 leading-relaxed">
-                    💡 <strong>Importante:</strong> Al hacer clic en el botón, el navegador te solicitará acceso a tu ubicación. Por favor, asegúrate de seleccionar la opción de <strong>"Ubicación Precisa"</strong> (y no ubicación aproximada o general) para que podamos llevar tu pedido a la dirección correcta.
+                <div>
+                  <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block mb-2">Método de entrega</label>
+                  <div className="grid grid-cols-2 gap-2 p-1.5 bg-gray-50 rounded-2xl">
+                    <button
+                      type="button"
+                      onClick={() => setDeliveryMethod('envio')}
+                      className={`py-3.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                        deliveryMethod === 'envio'
+                          ? 'bg-primary text-white shadow-sm font-extrabold'
+                          : 'text-gray-500 hover:bg-gray-200/50'
+                      }`}
+                    >
+                      Envío a domicilio
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setDeliveryMethod('retiro')}
+                      className={`py-3.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                        deliveryMethod === 'retiro'
+                          ? 'bg-primary text-white shadow-sm font-extrabold'
+                          : 'text-gray-500 hover:bg-gray-200/50'
+                      }`}
+                    >
+                      Retiro en tienda
+                    </button>
                   </div>
-
-                  {googleMapsUrl && (
-                    <p className="text-[10px] text-green-600 font-semibold mt-2 text-center flex items-center justify-center gap-1">
-                      ✅ Ubicación precisa GPS obtenida exitosamente.
-                    </p>
-                  )}
-                  {locationError && (
-                    <p className="text-[10px] text-red-500 font-semibold mt-2 text-center">
-                      ❌ {locationError}
-                    </p>
-                  )}
                 </div>
-              </div>
 
-              <div className="border-t border-dashed border-gray-200 pt-6 mt-6 mb-6">
-                <h4 className="font-dish text-sm font-bold text-dark mb-3 text-left">Método de pago:</h4>
-                <div className="grid grid-cols-3 gap-2 mb-6">
-                  <button
-                    type="button"
-                    onClick={() => setPaymentMethod('efectivo')}
-                    className={`py-2.5 px-1 rounded-xl text-xs font-bold border transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
-                      paymentMethod === 'efectivo'
-                        ? 'border-primary bg-primary/5 text-primary shadow-sm font-extrabold'
-                        : 'border-gray-200 bg-white text-gray-500 hover:bg-gray-50'
-                    }`}
-                  >
-                    <span className="text-lg">💵</span>
-                    <span>Efectivo</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setPaymentMethod('yape_plin')}
-                    className={`py-2.5 px-1 rounded-xl text-xs font-bold border transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
-                      paymentMethod === 'yape_plin'
-                        ? 'border-primary bg-primary/5 text-primary shadow-sm font-extrabold'
-                        : 'border-gray-200 bg-white text-gray-500 hover:bg-gray-50'
-                    }`}
-                  >
-                    <span className="text-lg">📱</span>
-                    <span>Yape/Plin</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setPaymentMethod('tarjeta')}
-                    className={`py-2.5 px-1 rounded-xl text-xs font-bold border transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
-                      paymentMethod === 'tarjeta'
-                        ? 'border-primary bg-primary/5 text-primary shadow-sm font-extrabold'
-                        : 'border-gray-200 bg-white text-gray-500 hover:bg-gray-50'
-                    }`}
-                  >
-                    <span className="text-lg">💳</span>
-                    <span>Tarjeta</span>
-                  </button>
+                {deliveryMethod === 'envio' && (
+                  <>
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                    >
+                      <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block mb-2">Dirección de Envío</label>
+                      <input 
+                        required 
+                        type="text" 
+                        value={clientAddress} 
+                        onChange={e => setClientAddress(e.target.value)} 
+                        className="w-full bg-white border border-gray-200 rounded-2xl px-5 py-3.5 text-sm focus:outline-none focus:border-primary/50 transition-colors placeholder:text-gray-300" 
+                        placeholder="Dirección, departamento o referencia" 
+                      />
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="space-y-2"
+                    >
+                      <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block mb-1">Ubicación GPS (Google Maps)</label>
+                      <button
+                        type="button"
+                        onClick={handleGetLocation}
+                        disabled={isGettingLocation}
+                        className="flex items-center justify-center gap-2 text-primary font-bold text-sm py-2.5 w-full hover:opacity-85 transition-all cursor-pointer"
+                      >
+                        {isGettingLocation ? (
+                          <>
+                            <Loader2 size={18} className="animate-spin" />
+                            <span>Obteniendo ubicación actual...</span>
+                          </>
+                        ) : (
+                          <>
+                            <Compass size={18} />
+                            <span>Obtener ubicación actual</span>
+                          </>
+                        )}
+                      </button>
+                      <span className="text-[10px] text-gray-400 text-center block leading-tight">
+                        Permite precisar tu ubicación para el repartidor.
+                      </span>
+
+                      {googleMapsUrl && (
+                        <p className="text-[10px] text-green-600 font-semibold mt-1 text-center flex items-center justify-center gap-1">
+                          ✅ Ubicación precisa GPS obtenida exitosamente.
+                        </p>
+                      )}
+                      {locationError && (
+                        <p className="text-[10px] text-red-500 font-semibold mt-1 text-center">
+                          ❌ {locationError}
+                        </p>
+                      )}
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="bg-amber-50/70 border border-amber-200/50 rounded-2xl p-4 flex gap-3 text-left"
+                    >
+                      <AlertTriangle className="text-amber-500 shrink-0 mt-0.5" size={18} />
+                      <p className="text-xs text-amber-900 font-medium leading-relaxed">
+                        El precio del total no incluye el costo de envío (delivery). Este se coordinará por WhatsApp.
+                      </p>
+                    </motion.div>
+                  </>
+                )}
+
+                <div>
+                  <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block mb-2">Método de pago</label>
+                  <div className="grid grid-cols-3 gap-2 p-1.5 bg-gray-50 rounded-2xl">
+                    <button
+                      type="button"
+                      onClick={() => setPaymentMethod('efectivo')}
+                      className={`py-3.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                        paymentMethod === 'efectivo'
+                          ? 'bg-primary text-white shadow-sm font-extrabold'
+                          : 'text-gray-500 hover:bg-gray-200/50'
+                      }`}
+                    >
+                      Efectivo
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setPaymentMethod('tarjeta')}
+                      className={`py-3.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                        paymentMethod === 'tarjeta'
+                          ? 'bg-primary text-white shadow-sm font-extrabold'
+                          : 'text-gray-500 hover:bg-gray-200/50'
+                      }`}
+                    >
+                      Tarjeta
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setPaymentMethod('yape_plin')}
+                      className={`py-3.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                        paymentMethod === 'yape_plin'
+                          ? 'bg-primary text-white shadow-sm font-extrabold'
+                          : 'text-gray-500 hover:bg-gray-200/50'
+                      }`}
+                    >
+                      Yape / Plin
+                    </button>
+                  </div>
                 </div>
 
                 {paymentMethod === 'yape_plin' && (
-                  <div className="bg-purple-50 border border-purple-100 p-4 rounded-2xl mb-4 text-left">
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-purple-50 border border-purple-100 p-4 rounded-2xl mb-2 text-left"
+                  >
                     <p className="text-xs text-purple-700 font-semibold mb-2">
                       Realiza tu Yape o Plin al número:
                     </p>
@@ -1060,7 +1124,7 @@ export default function App() {
                     <p className="text-[10px] text-purple-500 font-medium">
                       Puedes hacer tu Yape o Plin a este número haciendo clic para copiar.
                     </p>
-                  </div>
+                  </motion.div>
                 )}
 
                 <div className="space-y-1.5 border-t border-gray-100 pt-4 mb-4">
@@ -1081,7 +1145,7 @@ export default function App() {
 
               <button
                 onClick={sendToWhatsApp}
-                className="w-full bg-[#25D366] text-white py-4 rounded-2xl flex items-center justify-center gap-3 shadow-xl shadow-green-100 hover:scale-[1.02] transition-transform font-bold cursor-pointer"
+                className="w-full bg-[#25D366] text-white py-4 rounded-2xl flex items-center justify-center gap-3 shadow-xl shadow-green-100 hover:scale-[1.02] transition-transform font-bold cursor-pointer mt-6"
               >
                 Enviar Pedido a WhatsApp
                 <ChevronRight size={20} />
