@@ -193,6 +193,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [showSummary, setShowSummary] = useState(false);
+  const [showCheckoutModal, setShowCheckoutModal] = useState<boolean>(false);
   const [paymentMethod, setPaymentMethod] = useState<string>('efectivo');
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   
@@ -265,22 +266,46 @@ export default function App() {
           return;
         }
 
-        const formattedCategories: Category[] = cats.map(c => ({
-          id: c.categorías.toLowerCase().replace(/\s+/g, '-'),
-          nombre: c.categorías,
-          items: dishes
-            .filter(d => d.categoría === c.categorías)
-            .map(d => ({
-              nombre: d['nombre del plato'],
-              descripcion: d.descripción,
-              precio: d.precio,
-              imagen: LOCAL_IMAGES[d['nombre del plato']] || 
-                      LOCAL_IMAGES[d['nombre del plato'].trim()] || 
-                      LOCAL_IMAGES[d['nombre del plato'].toLowerCase().trim()] || 
-                      d['URL de imagen'] || 
-                      null
-            }))
-        }));
+        const formattedCategories: Category[] = cats
+          .map(c => {
+            const catName = (c as any).categorías || (c as any).Categorías || (c as any).categoría || (c as any).Categoría || (c as any).nombre || (c as any).Nombre || '';
+            if (!catName) return null;
+            return {
+              id: catName.toLowerCase().replace(/\s+/g, '-'),
+              nombre: catName,
+              items: dishes
+                .filter(d => {
+                  const dCat = d.categoría || (d as any).Categoría || (d as any).categorías || (d as any).Categorías || (d as any).categoria || (d as any).Categoria || '';
+                  return dCat === catName;
+                })
+                .map(d => {
+                  const name = d['nombre del plato'] || (d as any)['Nombre del plato'] || (d as any).nombre || (d as any).Nombre || '';
+                  const desc = d.descripción || (d as any).Descripción || (d as any).descripcion || (d as any).Descripcion || '';
+                  const price = d.precio || (d as any).Precio || '';
+                  
+                  // Buscar la imagen local por defecto si no viene de la hoja de cálculo
+                  const defaultDish = DEFAULT_MENU_DATA
+                    .flatMap(cat => cat.items)
+                    .find(item => item.nombre.toLowerCase().trim() === name.toLowerCase().trim());
+                  const defaultImg = defaultDish?.imagen || '';
+                  
+                  const sheetImg = d['URL de imagen'] || (d as any)['url de imagen'] || (d as any)['URL de Imagen'] || (d as any)['imagen URL'] || (d as any)['Imagen URL'] || '';
+                  
+                  return {
+                    nombre: name,
+                    descripcion: desc,
+                    precio: price,
+                    imagen: LOCAL_IMAGES[name] || 
+                            LOCAL_IMAGES[name.trim()] || 
+                            LOCAL_IMAGES[name.toLowerCase().trim()] || 
+                            sheetImg || 
+                            defaultImg || 
+                            null
+                  };
+                })
+            };
+          })
+          .filter(Boolean) as Category[];
 
         setCategories(formattedCategories);
         if (formattedCategories.length > 0) {
@@ -478,6 +503,7 @@ export default function App() {
     message += `\n*Envases (tappers):* S/.${tapperCost.toFixed(2)}`;
     message += `\n*TOTAL A PAGAR: S/.${total.toFixed(2)}*`;
 
+    setShowCheckoutModal(false);
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
   };
@@ -680,6 +706,7 @@ export default function App() {
                       <img 
                         src={dish.imagen} 
                         alt={dish.nombre} 
+                        loading="lazy"
                         className="w-full h-full object-cover"
                       />
                     ) : (
@@ -754,7 +781,7 @@ export default function App() {
         <footer className="mt-8 pt-8 pb-10 border-t border-gray-200 flex flex-col items-center justify-center">
           <p className="font-title text-2xl text-primary mb-4">{RESTAURANTE_NAME}</p>
           <div className="w-32 h-32 mb-6 rounded-2xl flex items-center justify-center p-2">
-            <img src="/logo_alesus.png" alt="Alesus Logo" className="w-full h-full object-contain" />
+            <img src="/logo_alesus.png" alt="Alesus Logo" loading="lazy" className="w-full h-full object-contain" />
           </div>
           <p className="text-[11px] text-gray-400 font-medium">© 2026 Todos los derechos reservados.</p>
         </footer>
@@ -856,66 +883,121 @@ export default function App() {
                   </div>
                 ))}
               </div>
-              {/* Delivery Details Form */}
-              <div className="border-t border-dashed border-gray-200 pt-6 mb-6">
-                <h4 className="font-dish text-sm font-bold text-dark mb-4 text-left">Datos de entrega / Delivery:</h4>
-                <div className="space-y-4">
-                  <div>
-                    <label className="text-[10px] font-bold text-gray-400 uppercase ml-1 block mb-1">Nombre Completo</label>
-                    <input 
-                      required 
-                      type="text" 
-                      value={clientName} 
-                      onChange={e => setClientName(e.target.value)} 
-                      className="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary/50 transition-colors" 
-                      placeholder="Ej. Juan Pérez" 
-                    />
-                  </div>
-                  <div>
-                    <label className="text-[10px] font-bold text-gray-400 uppercase ml-1 block mb-1">Dirección de Entrega</label>
-                    <input 
-                      required 
-                      type="text" 
-                      value={clientAddress} 
-                      onChange={e => setClientAddress(e.target.value)} 
-                      className="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary/50 transition-colors" 
-                      placeholder="Ej. Av. Larco 123, Dpto 402" 
-                    />
-                  </div>
-                  <div>
-                    <button
-                      type="button"
-                      onClick={handleGetLocation}
-                      disabled={isGettingLocation}
-                      className="w-full bg-primary/10 text-primary py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 font-bold text-xs hover:bg-primary/15 transition-colors disabled:opacity-70"
-                    >
-                      {isGettingLocation ? (
-                        <>
-                          <Loader2 size={16} className="animate-spin" />
-                          <span>Obteniendo ubicación precisa...</span>
-                        </>
-                      ) : (
-                        <>
-                          <MapPin size={16} />
-                          <span>Encontrar mi ubicación exacta</span>
-                        </>
-                      )}
-                    </button>
-                    {googleMapsUrl && (
-                      <p className="text-[10px] text-green-600 font-semibold mt-1 text-center flex items-center justify-center gap-1">
-                        ✅ Ubicación precisa GPS obtenida exitosamente.
-                      </p>
-                    )}
-                    {locationError && (
-                      <p className="text-[10px] text-red-500 font-semibold mt-1 text-center">
-                        ❌ {locationError}
-                      </p>
-                    )}
-                  </div>
+              <div className="space-y-1.5 border-t border-gray-100 pt-4 mb-6">
+                <div className="flex justify-between items-center text-xs text-gray-500">
+                  <span>Subtotal platos:</span>
+                  <span>S/.{calculateSubtotal().toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between items-center text-xs text-gray-500">
+                  <span>Envases (tappers):</span>
+                  <span>S/.{calculateTapperCost().toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between items-center pt-2 border-t border-dashed border-gray-200">
+                  <h3 className="font-dish text-base font-bold text-dark">Total a pagar</h3>
+                  <h3 className="font-dish text-lg font-bold text-primary">S/.{calculateTotal().toFixed(2)}</h3>
                 </div>
               </div>
 
-              <div className="border-t border-dashed border-gray-200 pt-6 mb-6">
+              <button
+                onClick={() => {
+                  setShowSummary(false);
+                  setShowCheckoutModal(true);
+                }}
+                className="w-full bg-primary text-white py-4 rounded-2xl flex items-center justify-center gap-3 shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform font-bold cursor-pointer"
+              >
+                Continuar con el Pedido
+                <ChevronRight size={20} />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {showCheckoutModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm flex items-end justify-center p-4 lg:p-0"
+          >
+            <motion.div
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              className="bg-white w-full max-w-md rounded-t-[3rem] p-6 max-h-[85vh] overflow-y-auto"
+            >
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="font-title text-2xl text-primary">Datos de Entrega</h2>
+                <button
+                  onClick={() => setShowCheckoutModal(false)}
+                  className="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center cursor-pointer"
+                >
+                  <X size={20} className="text-gray-400" />
+                </button>
+              </div>
+
+              <div className="space-y-4 text-left">
+                <div>
+                  <label className="text-[10px] font-bold text-gray-400 uppercase ml-1 block mb-1">Nombre Completo</label>
+                  <input 
+                    required 
+                    type="text" 
+                    value={clientName} 
+                    onChange={e => setClientName(e.target.value)} 
+                    className="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary/50 transition-colors" 
+                    placeholder="Ej. Juan Pérez" 
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] font-bold text-gray-400 uppercase ml-1 block mb-1">Dirección de Entrega</label>
+                  <input 
+                    required 
+                    type="text" 
+                    value={clientAddress} 
+                    onChange={e => setClientAddress(e.target.value)} 
+                    className="w-full bg-gray-50 border border-gray-100 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-primary/50 transition-colors" 
+                    placeholder="Ej. Av. Larco 123, Dpto 402" 
+                  />
+                </div>
+                <div>
+                  <button
+                    type="button"
+                    onClick={handleGetLocation}
+                    disabled={isGettingLocation}
+                    className="w-full bg-primary/10 text-primary py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 font-bold text-xs hover:bg-primary/15 transition-colors disabled:opacity-70 cursor-pointer"
+                  >
+                    {isGettingLocation ? (
+                      <>
+                        <Loader2 size={16} className="animate-spin" />
+                        <span>Obteniendo ubicación precisa...</span>
+                      </>
+                    ) : (
+                      <>
+                        <MapPin size={16} />
+                        <span>Obtener ubicación por GPS</span>
+                      </>
+                    )}
+                  </button>
+
+                  <div className="mt-2 bg-amber-50 border border-amber-100 rounded-xl p-3 text-[11px] text-amber-800 leading-relaxed">
+                    💡 <strong>Importante:</strong> Al hacer clic en el botón, el navegador te solicitará acceso a tu ubicación. Por favor, asegúrate de seleccionar la opción de <strong>"Ubicación Precisa"</strong> (y no ubicación aproximada o general) para que podamos llevar tu pedido a la dirección correcta.
+                  </div>
+
+                  {googleMapsUrl && (
+                    <p className="text-[10px] text-green-600 font-semibold mt-2 text-center flex items-center justify-center gap-1">
+                      ✅ Ubicación precisa GPS obtenida exitosamente.
+                    </p>
+                  )}
+                  {locationError && (
+                    <p className="text-[10px] text-red-500 font-semibold mt-2 text-center">
+                      ❌ {locationError}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="border-t border-dashed border-gray-200 pt-6 mt-6 mb-6">
                 <h4 className="font-dish text-sm font-bold text-dark mb-3 text-left">Método de pago:</h4>
                 <div className="grid grid-cols-3 gap-2 mb-6">
                   <button
@@ -996,9 +1078,10 @@ export default function App() {
                   </div>
                 </div>
               </div>
+
               <button
                 onClick={sendToWhatsApp}
-                className="w-full bg-[#25D366] text-white py-4 rounded-2xl flex items-center justify-center gap-3 shadow-xl shadow-green-100 hover:scale-[1.02] transition-transform font-bold"
+                className="w-full bg-[#25D366] text-white py-4 rounded-2xl flex items-center justify-center gap-3 shadow-xl shadow-green-100 hover:scale-[1.02] transition-transform font-bold cursor-pointer"
               >
                 Enviar Pedido a WhatsApp
                 <ChevronRight size={20} />
