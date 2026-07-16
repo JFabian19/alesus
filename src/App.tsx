@@ -19,17 +19,18 @@ const MARQUEE_TEXT = "🌊 LA FRESCURA DEL MAR EN CADA PLATO • 🇵🇪 TRADIC
 
 // Mapa de imágenes locales por defecto para platos conocidos
 const LOCAL_IMAGES: Record<string, string> = {
-  "CAUSA DE PULPO AL OLIVO": "/causa_pulpo_olivo.png",
+  "CAUSA DE ATÚN": "/causa_atun.png",
+  "CAUSA DE PULPO AL OLIVO": "/causa_pulpo_olivo.jpg",
   "CAUSA DE LANGOSTINOS": "/causa_langostinos.png",
-  "CAUSA ACEVICHADA": "/causa_acevichada.png",
-  "CEVICHE DE PESCADO": "/ceviche_pescado.png",
-  "CEVICHE ALESUS": "/ceviche_alesus.png",
-  "CEVICHE DE CONCHAS NEGRAS": "/ceviche_conchas_negras.png",
+  "CAUSA ACEVICHADA": "/causa_acevichada.jpg",
+  "CEVICHE DE PESCADO": "/ceviche_pescado.jpg",
+  "CEVICHE ALESUS": "/ceviche_alesus.jpg",
+  "CEVICHE DE CONCHAS NEGRAS": "/ceviche_conchas_negras.jpg",
   "Al natural": "/al_natural.png",
   "Al ají amarillo": "/al_aji_amarillo.png",
   "Al rocoto": "/al_rocoto.png",
   "Bicolor": "/bicolor.png",
-  "Tres sabores": "/tres_sabores.png",
+  "Tres sabores": "/tres_sabores.jpg",
   "JALEA MIXTA": "/jalea_mixta.jpg",
   "Jalea Mixta": "/jalea_mixta.jpg",
   "CHICHARRON DE PESCADO": "/chicharron_pescado.jpg",
@@ -39,11 +40,13 @@ const LOCAL_IMAGES: Record<string, string> = {
   "Chicharrón de Pulpo": "/chicharron_pulpo.png",
   "Chicharrón de Pulpo (Porción)": "/chicharron_pulpo.png",
   "DÚO ORIENTAL": "/duo_oriental.png",
-  "DÚO CAUSERO": "/duo_casero.png",
-  "DÚO CLÁSICO": "/duo_clasico.png",
-  "TRÍO POTENTE": "/trio_potente.jpg",
-  "TRÍO CLÁSICO": "/trio_clasico.png",
-  "TRÍO CHAUFERO": "/trio_chaufero.png",
+  "DÚO CAUSERO": "/duo_causero.jpg",
+  "DÚO CLÁSICO": "/duo_clasico.jpg",
+  "TRÍO POTENTE": "/trio_potente_sin_etiqueta.jpg",
+  "TRÍO CLÁSICO": "/trio_clasico_sin_etiqueta.jpg",
+  "TRÍO CHAUFERO": "/trio_chaufero_sin_etiqueta.jpg",
+  "TRÍO PESQUERO": "/trio_pesquero.jpg",
+  "TACU TACU C/ LOMO": "/tacu_tacu_lomo.jpg",
   "Trío Marino": "/trio_marino.jpg",
   "Trío Alesus": "/trio_alesus.jpg",
   "Trío Caliente": "/trio_caliente.png",
@@ -144,19 +147,19 @@ const LOCAL_IMAGES: Record<string, string> = {
   "SUSTANCIA DE CARNE": "/sustancia_carne.png",
   "SOPA DE DIETA": "/sopa_dieta.png",
   "CHUPE DE CANGREJO": "/chupe_cangrejo.png",
-  "PARIHUELA DE CABRILLA": "/parihuela_cabrilla.png",
+  "PARIHUELA DE CABRILLA": "/parihuela_cabrilla.jpg",
   "CHUPE DE LANGOSTINO": "/chupe_langostino.png",
   "TRUCHA FRITA CON PAPA DORADA": "/trucha_frita.png",
-  "ARROZ CON PATO": "/arroz_pato.png",
+  "ARROZ CON PATO": "/arroz_pato.jpg",
   "CABRITO A LA NORTEÑA CON YUCAS Y FRIJOLES": "/cabrito_nortena.png",
   "TACU TACU A LO MACHO": "/tacu_tacu.png",
-  "FETUCCINI A LA HUANCAINA CON LOMO SALTADO": "/fetuccini_huancaina.png",
-  "FETUCCINI EN SALSA DE MARISCOS": "/fetuccini_mariscos.png",
-  "TALLARINES VERDES CON PECHUGA A LA PLANCHA": "/tallarines_verdes.png",
+  "FETUCCINI A LA HUANCAINA CON LOMO SALTADO": "/fetuccini_huancaina.jpg",
+  "FETUCCINI EN SALSA DE MARISCOS": "/fetuccini_mariscos.jpg",
+  "TALLARINES VERDES CON PECHUGA A LA PLANCHA": "/tallarines_verdes.jpg",
   "LOMO SALTADO": "/lomo_saltado.jpg",
   "BISTEC A LO POBRE": "/bistec_pobre.png",
-  "PECHUGA A LA PLANCHA CON PAPAS NATIVAS": "/pechuga_plancha.png",
-  "TALLARÍN SALTADO DE CARNE": "/tallarin_saltado_carne.png",
+  "PECHUGA A LA PLANCHA CON PAPAS NATIVAS": "/pechuga_plancha.jpg",
+  "TALLARÍN SALTADO DE CARNE": "/tallarin_saltado_carne.jpg",
   "TALLARIN SALTADO DE POLLO": "/tallarin_saltado_pollo.jpg",
   "Chilcano Clásico": "/chilcano_clasico.png",
   "Chilcano de Maracuyá": "/chilcano_maracuya.png",
@@ -166,7 +169,20 @@ const LOCAL_IMAGES: Record<string, string> = {
   "Piña Colada": "/pina_colada.png",
   "Machu Picchu": "/machu_picchu.png",
   "Cuba Libre": "/cuba_libre.png",
-  "Mojito": "/mojito.png"
+  "Mojito": "/mojito.png",
+  "CHILCANO": "/chilcano.jpg",
+  "TEQUEÑOS CLÁSICOS": "/tequenos_clasicos.jpg",
+  "LECHE DE TIGRE": "/leche_tigre.jpg",
+  "CEVICHE DE PULPO": "/ceviche_pulpo.jpg",
+  "DÚO CHICHARRONERO": "/duo_chicharronero.jpg"
+};
+
+const getLocalImage = (name: string): string => {
+  if (!name) return '';
+  const normalize = (str: string) => str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+  const searchName = normalize(name);
+  const matchKey = Object.keys(LOCAL_IMAGES).find(key => normalize(key) === searchName);
+  return matchKey ? LOCAL_IMAGES[matchKey] : '';
 };
 
 interface Dish {
@@ -277,7 +293,7 @@ export default function App() {
               items: dishes
                 .filter(d => {
                   const dCat = d.categoría || (d as any).Categoría || (d as any).categorías || (d as any).Categorías || (d as any).categoria || (d as any).Categoria || '';
-                  return dCat === catName;
+                  return dCat.trim().toLowerCase() === catName.trim().toLowerCase();
                 })
                 .map(d => {
                   const name = d['nombre del plato'] || (d as any)['Nombre del plato'] || (d as any).nombre || (d as any).Nombre || '';
@@ -296,9 +312,7 @@ export default function App() {
                     nombre: name,
                     descripcion: desc,
                     precio: price,
-                    imagen: LOCAL_IMAGES[name] || 
-                            LOCAL_IMAGES[name.trim()] || 
-                            LOCAL_IMAGES[name.toLowerCase().trim()] || 
+                    imagen: getLocalImage(name) || 
                             sheetImg || 
                             defaultImg || 
                             null

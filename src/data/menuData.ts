@@ -20,7 +20,7 @@ export const DEFAULT_MENU_DATA: Category[] = [
         nombre: "CAUSA DE PULPO AL OLIVO",
         descripcion: "Preparada a base de papa amarilla, ají amarillo, limón, aceite vegetal y pulpo.",
         precio: "S/ 30.00",
-        imagen: "/causa_pulpo_olivo.png"
+        imagen: "/causa_pulpo_olivo.jpg"
       },
       {
         nombre: "CAUSA DE LANGOSTINOS",
@@ -32,7 +32,25 @@ export const DEFAULT_MENU_DATA: Category[] = [
         nombre: "CAUSA ACEVICHADA",
         descripcion: "Fina selección de papas, bañados en salsa cevichera.",
         precio: "S/ 35.00",
-        imagen: "/causa_acevichada.png"
+        imagen: "/causa_acevichada.jpg"
+      },
+      {
+        nombre: "TEQUEÑOS CLÁSICOS",
+        descripcion: "Deliciosos tequeños rellenos de puro queso.",
+        precio: "S/ 16.00",
+        imagen: "/tequenos_clasicos.jpg"
+      },
+      {
+        nombre: "LECHE DE TIGRE",
+        descripcion: "Cortes de pescado con nuestra preparación de base especial, acompañado de cebolla en juliana, camote glaseado y choclo.",
+        precio: "S/ 20.00",
+        imagen: "/leche_tigre.jpg"
+      },
+      {
+        nombre: "CAUSA DE ATÚN",
+        descripcion: "Elaborada a base de papa amarilla, ají amarillo, limón, sal al gusto, atún.",
+        precio: "S/ 25.00",
+        imagen: "/causa_atun.png"
       }
     ]
   },
@@ -44,19 +62,25 @@ export const DEFAULT_MENU_DATA: Category[] = [
         nombre: "CEVICHE DE PESCADO",
         descripcion: "Pescado del día, acompañado de camote glaseado y choclo.",
         precio: "S/ 35.00",
-        imagen: "/ceviche_pescado.png"
+        imagen: "/ceviche_pescado.jpg"
       },
       {
         nombre: "CEVICHE ALESUS",
         descripcion: "Preparado con pescado fresco, espinaca, cilantro, nuestra base especial, ají limo, choclo y camote glaseado.",
         precio: "S/ 38.00",
-        imagen: "/ceviche_alesus.png"
+        imagen: "/ceviche_alesus.jpg"
       },
       {
         nombre: "CEVICHE DE CONCHAS NEGRAS",
         descripcion: "Exquisitas conchas negras, con nuestra preparación de base especial, acompañada de camote glaseado y choclo.",
         precio: "S/ 40.00",
-        imagen: "/ceviche_conchas_negras.png"
+        imagen: "/ceviche_conchas_negras.jpg"
+      },
+      {
+        nombre: "CEVICHE DE PULPO",
+        descripcion: "Exquisitos trozos de Pulpo, cebolla picada, jugo de limón y cilantro.",
+        precio: "S/ 38.00",
+        imagen: "/ceviche_pulpo.jpg"
       }
     ]
   },
@@ -92,7 +116,7 @@ export const DEFAULT_MENU_DATA: Category[] = [
         nombre: "Tres sabores",
         descripcion: "Láminas de pescado bañadas en crema de ají amarillo, rocoto y crema de olivo.",
         precio: "S/ 40.00",
-        imagen: "/tres_sabores.png"
+        imagen: "/tres_sabores.jpg"
       }
     ]
   },
@@ -139,7 +163,36 @@ export const DEFAULT_MENU_DATA: Category[] = [
       }
     ]
   },
-
+  {
+    id: "duos-marinos",
+    nombre: "Dúos Marinos",
+    items: [
+      {
+        nombre: "DÚO ORIENTAL",
+        descripcion: "Ceviche de pescado + Chaufa de mariscos.",
+        precio: "S/ 35.00",
+        imagen: "/duo_oriental.png"
+      },
+      {
+        nombre: "DÚO CAUSERO",
+        descripcion: "Causa de atún + Ceviche de pescado.",
+        precio: "S/ 33.00",
+        imagen: "/duo_causero.jpg"
+      },
+      {
+        nombre: "DÚO CHICHARRONERO",
+        descripcion: "Ceviche de pescado + Chicharron de pescado.",
+        precio: "S/ 35.00",
+        imagen: "/duo_chicharronero.jpg"
+      },
+      {
+        nombre: "DÚO CLÁSICO",
+        descripcion: "Ceviche de pescado + Arroz con mariscos.",
+        precio: "S/ 33.00",
+        imagen: "/duo_clasico.jpg"
+      }
+    ]
+  },
   {
     id: "trios-marinos",
     nombre: "Tríos Marinos",
@@ -148,19 +201,19 @@ export const DEFAULT_MENU_DATA: Category[] = [
         nombre: "TRÍO POTENTE",
         descripcion: "Leche de tigre + Arroz con mariscos + Chicharrón de pescado.",
         precio: "S/ 40.00",
-        imagen: "/trio_potente.jpg"
+        imagen: "/trio_potente_sin_etiqueta.jpg"
       },
       {
         nombre: "TRÍO CLÁSICO",
         descripcion: "Ceviche + Arroz con mariscos + Chicharrón de pescado.",
         precio: "S/ 40.00",
-        imagen: "/trio_clasico.png"
+        imagen: "/trio_clasico_sin_etiqueta.jpg"
       },
       {
         nombre: "TRÍO CHAUFERO",
         descripcion: "Ceviche + Chaufa de mariscos + Chicharrón de pescado.",
         precio: "S/ 43.00",
-        imagen: "/trio_chaufero.png"
+        imagen: "/trio_chaufero_sin_etiqueta.jpg"
       },
       {
         nombre: "Trío Marino",
@@ -191,6 +244,12 @@ export const DEFAULT_MENU_DATA: Category[] = [
         descripcion: "Ceviche de pescado + seco de cabrito + frijoles.",
         precio: "S/ 45.00",
         imagen: "/trio_norteno.png"
+      },
+      {
+        nombre: "TRÍO PESQUERO",
+        descripcion: "Ceviche + Arroz con mariscos + Causa de atún.",
+        precio: "S/ 43.00",
+        imagen: "/trio_pesquero.jpg"
       }
     ]
   },
@@ -245,6 +304,12 @@ export const DEFAULT_MENU_DATA: Category[] = [
         descripcion: "Chaufa de mariscos acompañado de crocante chicharrón.",
         precio: "S/ 40.00",
         imagen: "/chaufa_mariscos_chicharron.png"
+      },
+      {
+        nombre: "DÚO CHICHARRONERO",
+        descripcion: "Ceviche de pescado + Chicharrón de pescado.",
+        precio: "S/ 35.00",
+        imagen: "/duo_chicharronero.jpg"
       }
     ]
   },
@@ -340,13 +405,19 @@ export const DEFAULT_MENU_DATA: Category[] = [
         nombre: "PARIHUELA DE CABRILLA",
         descripcion: "Sopa preparada con una deliciosa Cabrilla fresca acompañado con yucas.",
         precio: "S/ 35.00",
-        imagen: "/parihuela_cabrilla.png"
+        imagen: "/parihuela_cabrilla.jpg"
       },
       {
         nombre: "CHUPE DE LANGOSTINO",
         descripcion: "Sopa espesa y picante que lleva camarones, papa amarilla y aderezo especial de la casa.",
         precio: "S/ 40.00",
         imagen: "/chupe_langostino.png"
+      },
+      {
+        nombre: "CHILCANO",
+        descripcion: "Caldo de cabeza y espinazo acompañado con cebolla, orégano, perejil, trozos de pescado.",
+        precio: "S/ 11.00",
+        imagen: "/chilcano.jpg"
       }
     ]
   },
@@ -364,7 +435,7 @@ export const DEFAULT_MENU_DATA: Category[] = [
         nombre: "ARROZ CON PATO",
         descripcion: "Delicioso arroz en salsa de Pato, macerado con chicha de jora, zapallo loche y aderezo criollo.",
         precio: "S/ 35.00",
-        imagen: "/arroz_pato.png"
+        imagen: "/arroz_pato.jpg"
       },
       {
         nombre: "CABRITO A LA NORTEÑA CON YUCAS Y FRIJOLES",
@@ -378,6 +449,12 @@ export const DEFAULT_MENU_DATA: Category[] = [
     id: "especialidad-del-chef",
     nombre: "Especialidad del Chef",
     items: [
+      {
+        nombre: "TACU TACU C/ LOMO",
+        descripcion: "Nuestro tradicional tacu tacu crocante servido con jugoso lomo saltado al wok; una combinación clásica de sabor intenso y reconfortante.",
+        precio: "S/ 45.00",
+        imagen: "/tacu_tacu_lomo.jpg"
+      },
       {
         nombre: "TACU TACU A LO MACHO",
         descripcion: "Frejol y arroz salteado, bañado en salsa de mariscos al vino blanco y punto de ají amarillo.",
@@ -394,19 +471,19 @@ export const DEFAULT_MENU_DATA: Category[] = [
         nombre: "FETUCCINI A LA HUANCAINA CON LOMO SALTADO",
         descripcion: "Sabroso espagueti al dente servido con una salsa de crema de huancaína y adornado con un exquisito lomo saltado.",
         precio: "S/ 35.00",
-        imagen: "/fetuccini_huancaina.png"
+        imagen: "/fetuccini_huancaina.jpg"
       },
       {
         nombre: "FETUCCINI EN SALSA DE MARISCOS",
         descripcion: "Espagueti al dente con salsa de huancaina cubierto con picante de mariscos.",
         precio: "S/ 38.00",
-        imagen: "/fetuccini_mariscos.png"
+        imagen: "/fetuccini_mariscos.jpg"
       },
       {
         nombre: "TALLARINES VERDES CON PECHUGA A LA PLANCHA",
         descripcion: "Delicioso espagueti al dente servido con una salsa al puesto, acompañado con pechuga a la plancha bien sazonada.",
         precio: "S/ 35.00",
-        imagen: "/tallarines_verdes.png"
+        imagen: "/tallarines_verdes.jpg"
       }
     ]
   },
@@ -430,7 +507,7 @@ export const DEFAULT_MENU_DATA: Category[] = [
         nombre: "PECHUGA A LA PLANCHA CON PAPAS NATIVAS",
         descripcion: "Deliciosa pechuga a la plancha, papas fritas nativas and arroz. Acompañado con cremas a elegir.",
         precio: "S/ 28.00",
-        imagen: "/pechuga_plancha.png"
+        imagen: "/pechuga_plancha.jpg"
       }
     ]
   },
@@ -442,7 +519,7 @@ export const DEFAULT_MENU_DATA: Category[] = [
         nombre: "TALLARÍN SALTADO DE CARNE",
         descripcion: "Delicioso espagueti al dente acompañado con salteado de carne.",
         precio: "S/ 28.00",
-        imagen: "/tallarin_saltado_carne.png"
+        imagen: "/tallarin_saltado_carne.jpg"
       },
       {
         nombre: "TALLARIN SALTADO DE POLLO",
