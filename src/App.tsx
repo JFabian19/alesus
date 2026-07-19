@@ -17,164 +17,122 @@ const BANNER_PATH = ""; // Reemplaza con la ruta de tu banner en public/ (ej: /b
 const MARQUEE_TEXT = "🌊 LA FRESCURA DEL MAR EN CADA PLATO • 🇵🇪 TRADICIÓN CRIOLLA Y TOQUE GOURMET • ¡VIVE LA EXPERIENCIA ALESUS! 🍤🍷 • ";
 // ==========================================
 
-// Mapa de imágenes locales por defecto para platos conocidos
+// Mapa de imágenes locales por defecto para platos conocidos (imágenes ultra-optimizadas en WebP ~10KB)
 const LOCAL_IMAGES: Record<string, string> = {
-  "CAUSA DE ATÚN": "/causa_atun.png",
-  "CAUSA DE PULPO AL OLIVO": "/causa_pulpo_olivo.jpg",
-  "CAUSA DE LANGOSTINOS": "/causa_langostinos.png",
-  "CAUSA ACEVICHADA": "/causa_acevichada.jpg",
-  "CEVICHE DE PESCADO": "/ceviche_pescado.jpg",
-  "CEVICHE ALESUS": "/ceviche_alesus.jpg",
-  "CEVICHE DE CONCHAS NEGRAS": "/ceviche_conchas_negras.jpg",
-  "Al natural": "/al_natural.png",
-  "Al ají amarillo": "/al_aji_amarillo.png",
-  "Al rocoto": "/al_rocoto.png",
-  "Bicolor": "/bicolor.png",
-  "Tres sabores": "/tres_sabores.jpg",
-  "JALEA MIXTA": "/jalea_mixta.jpg",
-  "Jalea Mixta": "/jalea_mixta.jpg",
-  "CHICHARRON DE PESCADO": "/chicharron_pescado.jpg",
-  "Chicharrón de Pescado": "/chicharron_pescado.jpg",
-  "Chicharrón de Calamar": "/chicharron_calamar.png",
-  "Chicharrón de Calamar (Porción)": "/chicharron_calamar.png",
-  "Chicharrón de Pulpo": "/chicharron_pulpo.png",
-  "Chicharrón de Pulpo (Porción)": "/chicharron_pulpo.png",
-  "DÚO ORIENTAL": "/duo_oriental.png",
-  "DÚO CAUSERO": "/duo_causero.jpg",
-  "DÚO CLÁSICO": "/duo_clasico.jpg",
-  "TRÍO POTENTE": "/trio_potente_sin_etiqueta.jpg",
-  "TRÍO CLÁSICO": "/trio_clasico_sin_etiqueta.jpg",
-  "TRÍO CHAUFERO": "/trio_chaufero_sin_etiqueta.jpg",
-  "TRÍO PESQUERO": "/trio_pesquero.jpg",
-  "TACU TACU C/ LOMO": "/tacu_tacu_lomo.jpg",
-  "Trío Marino": "/trio_marino.jpg",
-  "Trío Alesus": "/trio_alesus.jpg",
-  "Trío Caliente": "/trio_caliente.png",
-  "Trío Huachano": "/trio_huachano.png",
-  "Trío Norteño": "/trio_norteno.png",
-  "Chicharrón Mixto": "/chicharron_mixto.png",
-  "Chicharrón Mixto (Porción)": "/chicharron_mixto.png",
-  "Combinado de Pescado": "/combinado_pescado.png",
-  "Combinado Mixto": "/combinado_mixto.png",
-  "Combinado Especial": "/combinado_especial.png",
-  "Jalea de Pescado": "/jalea_pescado.png",
-  "Jalea de Pescado (Porción)": "/jalea_pescado.png",
-  "Arroz con mariscos + ceviche": "/arroz_mariscos_ceviche.png",
-  "Chaufa de pescado + ceviche": "/chaufa_pescado_ceviche.png",
-  "Chaufa de mariscos + ceviche": "/chaufa_mariscos_ceviche.png",
-  "Arroz con mariscos + chicharrón": "/arroz_mariscos_chicharron.png",
-  "Chaufa de mariscos + chicharrón": "/chaufa_mariscos_chicharron.png",
-  "Chicharrón de pescado (Niños)": "/chicharron_pescado_ninos.png",
-  "Chicharrón de pollo (Niños)": "/chicharron_pollo.png",
-  "Milanesa de pollo (Niños)": "/milanesa_pollo.png",
-  "Salchipapa (Niños)": "/salchipapa.png",
-  "Tallarines en salsa alfredo (Niños)": "/tallarines_alfredo.png",
-  "Chicharrón de pescado": "/chicharron_pescado_ninos.png",
-  "chicharrón de pescado": "/chicharron_pescado_ninos.png",
-  "Chicharrón de pollo": "/chicharron_pollo.png",
-  "chicharrón de pollo": "/chicharron_pollo.png",
-  "Milanesa de pollo": "/milanesa_pollo.png",
-  "milanesa de pollo": "/milanesa_pollo.png",
-  "Salchipapa": "/salchipapa.png",
-  "salchipapa": "/salchipapa.png",
-  "Tallarines en salsa alfredo": "/tallarines_alfredo.png",
-  "tallarines en salsa alfredo": "/tallarines_alfredo.png",
-  "Tallarines en salsa Alfredo": "/tallarines_alfredo.png",
-  "Santiago Queirolo": "/santiago_queirolo.png",
-  "santiago queirolo": "/santiago_queirolo.png",
-  "Tabernero": "/tabernero.png",
-  "tabernero": "/tabernero.png",
-  "Tacama": "/tacama.png",
-  "tacama": "/tacama.png",
-  "Casillero del Diablo": "/casillero_del_diablo.png",
-  "casillero del diablo": "/casillero_del_diablo.png",
-  "Navarro Correas": "/navarro_correas.png",
-  "navarro correas": "/navarro_correas.png",
-  "Pilsen": "/pilsen.png",
-  "pilsen": "/pilsen.png",
-  "Cristal": "/cristal.png",
-  "cristal": "/cristal.png",
-  "Cusqueña": "/cusquena.png",
-  "cusqueña": "/cusquena.png",
-  "Corona": "/corona.png",
-  "corona": "/corona.png",
-  "Stella Artois": "/stella_artois.png",
-  "stella artois": "/stella_artois.png",
-  "Heineken": "/heineken.png",
-  "heineken": "/heineken.png",
-  "Café Pasado": "/cafe_pasado.png",
-  "café pasado": "/cafe_pasado.png",
-  "Infusiones": "/infusiones.png",
-  "infusiones": "/infusiones.png",
-  "Tortilla de Mariscos": "/tortilla_mariscos.png",
-  "tortilla de mariscos": "/tortilla_mariscos.png",
-  "Tortilla de Langostinos": "/tortilla_langostinos.png",
-  "tortilla de langostinos": "/tortilla_langostinos.png",
-  "Tortilla de Verduras": "/tortilla_verduras.png",
-  "tortilla de verduras": "/tortilla_verduras.png",
-  "Porción de Arroz": "/porcion_arroz.png",
-  "porción de arroz": "/porcion_arroz.png",
-  "porcion de arroz": "/porcion_arroz.png",
-  "Porción de Yuca": "/porcion_yuca.png",
-  "porción de yuca": "/porcion_yuca.png",
-  "porcion de yuca": "/porcion_yuca.png",
-  "Porción de Camote": "/porcion_camote.png",
-  "porción de camote": "/porcion_camote.png",
-  "porcion de camote": "/porcion_camote.png",
-  "Porción de Papas Fritas": "/porcion_papas.png",
-  "porción de papas fritas": "/porcion_papas.png",
-  "porcion de papas fritas": "/porcion_papas.png",
-  "Porción de Chifles": "/porcion_chifles.png",
-  "porción de chifles": "/porcion_chifles.png",
-  "porcion de chifles": "/porcion_chifles.png",
-  "Porción de Cancha": "/porcion_cancha.png",
-  "porción de cancha": "/porcion_cancha.png",
-  "porcion de cancha": "/porcion_cancha.png",
-  "Gaseosa Gordita": "/gaseosa_gordita.png",
-  "gaseosa gordita": "/gaseosa_gordita.png",
-  "Inka Cola / Coca Cola / Sprite / Fanta 500ml": "/gaseosa_500ml.png",
-  "inka cola / coca cola / sprite / fanta 500ml": "/gaseosa_500ml.png",
-  "Gaseosa Personal": "/gaseosa_personal.png",
-  "gaseosa personal": "/gaseosa_personal.png",
-  "Agua Mineral": "/agua_mineral.png",
-  "agua mineral": "/agua_mineral.png",
-  "Limonada / Chicha Morada / Maracuyá / Chicha de Jora (1/2 Jarra)": "/refrescos_media_jarra.png",
-  "limonada / chicha morada / maracuyá / chicha de jora (1/2 jarra)": "/refrescos_media_jarra.png",
-  "Limonada / Chicha Morada / Maracuyá / Chicha de Jora (Jarra)": "/refrescos_jarra.png",
-  "limonada / chicha morada / maracuyá / chicha de jora (jarra)": "/refrescos_jarra.png",
-  "Limonada / Chicha Morada / Maracuyá / Chicha de Jora (Vaso)": "/refrescos_vaso.png",
-  "limonada / chicha morada / maracuyá / chicha de jora (vaso)": "/refrescos_vaso.png",
-  "SUSTANCIA DE CARNE": "/sustancia_carne.png",
-  "SOPA DE DIETA": "/sopa_dieta.png",
-  "CHUPE DE CANGREJO": "/chupe_cangrejo.png",
-  "PARIHUELA DE CABRILLA": "/parihuela_cabrilla.jpg",
-  "CHUPE DE LANGOSTINO": "/chupe_langostino.png",
-  "TRUCHA FRITA CON PAPA DORADA": "/trucha_frita.png",
-  "ARROZ CON PATO": "/arroz_pato.jpg",
-  "CABRITO A LA NORTEÑA CON YUCAS Y FRIJOLES": "/cabrito_nortena.png",
-  "TACU TACU A LO MACHO": "/tacu_tacu.png",
-  "FETUCCINI A LA HUANCAINA CON LOMO SALTADO": "/fetuccini_huancaina.jpg",
-  "FETUCCINI EN SALSA DE MARISCOS": "/fetuccini_mariscos.jpg",
-  "TALLARINES VERDES CON PECHUGA A LA PLANCHA": "/tallarines_verdes.jpg",
-  "LOMO SALTADO": "/lomo_saltado.jpg",
-  "BISTEC A LO POBRE": "/bistec_pobre.png",
-  "PECHUGA A LA PLANCHA CON PAPAS NATIVAS": "/pechuga_plancha.jpg",
-  "TALLARÍN SALTADO DE CARNE": "/tallarin_saltado_carne.jpg",
-  "TALLARIN SALTADO DE POLLO": "/tallarin_saltado_pollo.jpg",
-  "Chilcano Clásico": "/chilcano_clasico.png",
-  "Chilcano de Maracuyá": "/chilcano_maracuya.png",
-  "Pisco Sour": "/pisco_sour.png",
-  "Maracuyá Sour": "/maracuya_sour.png",
-  "Algarrobina": "/algarrobina.png",
-  "Piña Colada": "/pina_colada.png",
-  "Machu Picchu": "/machu_picchu.png",
-  "Cuba Libre": "/cuba_libre.png",
-  "Mojito": "/mojito.png",
-  "CHILCANO": "/chilcano.jpg",
-  "TEQUEÑOS CLÁSICOS": "/tequenos_clasicos.jpg",
-  "LECHE DE TIGRE": "/leche_tigre.jpg",
-  "CEVICHE DE PULPO": "/ceviche_pulpo.jpg",
-  "DÚO CHICHARRONERO": "/duo_chicharronero.jpg"
+  // Fotos reales con fondo oscuro
+  "CAUSA DE ATÚN": "/causa_atun.webp",
+  "CAUSA DE PULPO AL OLIVO": "/causa_pulpo_olivo.webp",
+  "CAUSA DE LANGOSTINOS": "/causa_langostinos.webp",
+  "CAUSA ACEVICHADA": "/causa_acevichada.webp",
+  "CEVICHE DE PESCADO": "/ceviche_pescado.webp",
+  "CEVICHE ALESUS": "/ceviche_alesus.webp",
+  "CEVICHE DE CONCHAS NEGRAS": "/ceviche_conchas_negras.webp",
+  "Tres sabores": "/tres_sabores.webp",
+  "JALEA MIXTA": "/jalea_mixta.webp",
+  "Jalea Mixta": "/jalea_mixta.webp",
+  "CHICHARRON DE PESCADO": "/chicharron_pescado.webp",
+  "Chicharrón de Pescado": "/chicharron_pescado.webp",
+  "DÚO ORIENTAL": "/duo_oriental.webp",
+  "DÚO CAUSERO": "/duo_causero.webp",
+  "DÚO CLÁSICO": "/duo_clasico.webp",
+  "TRÍO POTENTE": "/trio_potente_sin_etiqueta.webp",
+  "TRÍO CLÁSICO": "/trio_clasico_sin_etiqueta.webp",
+  "TRÍO CHAUFERO": "/trio_chaufero_sin_etiqueta.webp",
+  "TRÍO PESQUERO": "/trio_pesquero.webp",
+  "SUSTANCIA DE CARNE": "/sustancia_carne.webp",
+  "SOPA DE DIETA": "/sopa_dieta.webp",
+  "CHUPE DE CANGREJO": "/chupe_cangrejo.webp",
+  "PARIHUELA DE CABRILLA": "/parihuela_cabrilla.webp",
+  "CHUPE DE LANGOSTINO": "/chupe_langostino.webp",
+  "TRUCHA FRITA CON PAPA DORADA": "/trucha_frita.webp",
+  "ARROZ CON PATO": "/arroz_pato.webp",
+  "CABRITO A LA NORTEÑA CON YUCAS Y FRIJOLES": "/cabrito_nortena.webp",
+  "TACU TACU C/ LOMO": "/tacu_tacu_lomo.webp",
+  "TACU TACU A LO MACHO": "/tacu_tacu.webp",
+  "FETUCCINI A LA HUANCAINA CON LOMO SALTADO": "/fetuccini_huancaina.webp",
+  "FETUCCINI EN SALSA DE MARISCOS": "/fetuccini_mariscos.webp",
+  "TALLARINES VERDES CON PECHUGA A LA PLANCHA": "/tallarines_verdes.webp",
+  "LOMO SALTADO": "/lomo_saltado.webp",
+  "BISTEC A LO POBRE": "/bistec_pobre.webp",
+  "PECHUGA A LA PLANCHA CON PAPAS NATIVAS": "/pechuga_plancha.webp",
+  "TALLARÍN SALTADO DE CARNE": "/tallarin_saltado_carne.webp",
+  "TALLARIN SALTADO DE POLLO": "/tallarin_saltado_pollo.webp",
+  "CHILCANO": "/chilcano.webp",
+  "TEQUEÑOS CLÁSICOS": "/tequenos_clasicos.webp",
+  "LECHE DE TIGRE": "/leche_tigre.webp",
+  "CEVICHE DE PULPO": "/ceviche_pulpo.webp",
+  "DÚO CHICHARRONERO": "/duo_chicharronero.webp",
+
+  // Guarniciones
+  "Porción de Arroz": "/porcion_arroz.webp",
+  "porción de arroz": "/porcion_arroz.webp",
+  "porcion de arroz": "/porcion_arroz.webp",
+  "Porción de Yuca": "/porcion_yuca.webp",
+  "porción de yuca": "/porcion_yuca.webp",
+  "porcion de yuca": "/porcion_yuca.webp",
+  "Porción de Camote": "/porcion_camote.webp",
+  "porción de camote": "/porcion_camote.webp",
+  "porcion de camote": "/porcion_camote.webp",
+  "Porción de Papas Fritas": "/porcion_papas.webp",
+  "porción de papas fritas": "/porcion_papas.webp",
+  "porcion de papas fritas": "/porcion_papas.webp",
+  "Porción de Chifles": "/porcion_chifles.webp",
+  "porción de chifles": "/porcion_chifles.webp",
+  "porcion de chifles": "/porcion_chifles.webp",
+  "Porción de Cancha": "/porcion_cancha.webp",
+  "porción de cancha": "/porcion_cancha.webp",
+  "porcion de cancha": "/porcion_cancha.webp",
+
+  // Bebidas, Refrescos Naturales, Cervezas, Vinos y Tragos
+  "Gaseosa Gordita": "/gaseosa_gordita.webp",
+  "gaseosa gordita": "/gaseosa_gordita.webp",
+  "Inka Cola / Coca Cola / Sprite / Fanta 500ml": "/gaseosa_500ml.webp",
+  "inka cola / coca cola / sprite / fanta 500ml": "/gaseosa_500ml.webp",
+  "Gaseosa Personal": "/gaseosa_personal.webp",
+  "gaseosa personal": "/gaseosa_personal.webp",
+  "Agua Mineral": "/agua_mineral.webp",
+  "agua mineral": "/agua_mineral.webp",
+  "Limonada / Chicha Morada / Maracuyá / Chicha de Jora (1/2 Jarra)": "/refrescos_media_jarra.webp",
+  "limonada / chicha morada / maracuyá / chicha de jora (1/2 jarra)": "/refrescos_media_jarra.webp",
+  "Limonada / Chicha Morada / Maracuyá / Chicha de Jora (Jarra)": "/refrescos_jarra.webp",
+  "limonada / chicha morada / maracuyá / chicha de jora (jarra)": "/refrescos_jarra.webp",
+  "Limonada / Chicha Morada / Maracuyá / Chicha de Jora (Vaso)": "/refrescos_vaso.webp",
+  "limonada / chicha morada / maracuyá / chicha de jora (vaso)": "/refrescos_vaso.webp",
+  "Santiago Queirolo": "/santiago_queirolo.webp",
+  "santiago queirolo": "/santiago_queirolo.webp",
+  "Tabernero": "/tabernero.webp",
+  "tabernero": "/tabernero.webp",
+  "Tacama": "/tacama.webp",
+  "tacama": "/tacama.webp",
+  "Casillero del Diablo": "/casillero_del_diablo.webp",
+  "casillero del diablo": "/casillero_del_diablo.webp",
+  "Navarro Correas": "/navarro_correas.webp",
+  "navarro correas": "/navarro_correas.webp",
+  "Pilsen": "/pilsen.webp",
+  "pilsen": "/pilsen.webp",
+  "Cristal": "/cristal.webp",
+  "cristal": "/cristal.webp",
+  "Cusqueña": "/cusquena.webp",
+  "cusqueña": "/cusquena.webp",
+  "Corona": "/corona.webp",
+  "corona": "/corona.webp",
+  "Stella Artois": "/stella_artois.webp",
+  "stella artois": "/stella_artois.webp",
+  "Heineken": "/heineken.webp",
+  "heineken": "/heineken.webp",
+  "Café Pasado": "/cafe_pasado.webp",
+  "café pasado": "/cafe_pasado.webp",
+  "Infusiones": "/infusiones.webp",
+  "infusiones": "/infusiones.webp",
+  "Chilcano Clásico": "/chilcano_clasico.webp",
+  "Chilcano de Maracuyá": "/chilcano_maracuya.webp",
+  "Pisco Sour": "/pisco_sour.webp",
+  "Maracuyá Sour": "/maracuya_sour.webp",
+  "Algarrobina": "/algarrobina.webp",
+  "Piña Colada": "/pina_colada.webp",
+  "Machu Picchu": "/machu_picchu.webp",
+  "Cuba Libre": "/cuba_libre.webp",
+  "Mojito": "/mojito.webp"
 };
 
 const getLocalImage = (name: string): string => {
@@ -711,43 +669,38 @@ export default function App() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4 items-start">
               {cat.items.map((dish, idx) => (
                 <motion.div
                   key={idx}
                   whileHover={{ y: -4 }}
                   onClick={() => setSelectedDish(dish)}
-                  className="group bg-white rounded-[2rem] overflow-hidden flex flex-col shadow-sm border border-gray-100 hover:border-primary/30 hover:shadow-md transition-all duration-200 cursor-pointer"
+                  className="group bg-white rounded-[2rem] overflow-hidden flex flex-col shadow-sm border border-gray-100 hover:border-primary/30 hover:shadow-md transition-all duration-200 cursor-pointer h-fit self-start"
                 >
-                  <div className="bg-primary/5 aspect-square flex items-center justify-center relative overflow-hidden border-b border-gray-100">
-                    {dish.imagen ? (
+                  {dish.imagen && (
+                    <div className="bg-primary/5 aspect-square flex items-center justify-center relative overflow-hidden border-b border-gray-100">
                       <img 
                         src={dish.imagen} 
                         alt={dish.nombre} 
                         loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                    ) : (
-                      <div className="flex flex-col items-center justify-center gap-1.5 p-4">
-                        <Utensils className="text-primary/20" size={24} />
-                        <span className="font-dish font-bold text-[9px] text-primary/40 uppercase tracking-widest text-center">
-                          Alesus Rest
-                        </span>
-                      </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                   
-                  <div className="p-4 flex flex-col flex-1">
-                    <h4 className="font-dish font-bold text-dark text-[13px] leading-tight mb-1">
-                      {dish.nombre}
-                    </h4>
-                    {dish.descripcion && (
-                      <p className="text-[10px] text-gray-400 leading-tight mb-2 line-clamp-3">
-                        {dish.descripcion}
-                      </p>
-                    )}
-                    <div className="flex-1"></div>
-                    <div className="flex items-center justify-between mt-2">
+                  <div className="p-4 flex flex-col justify-between flex-1">
+                    <div>
+                      <h4 className="font-dish font-bold text-dark text-[13px] leading-tight mb-1">
+                        {dish.nombre}
+                      </h4>
+                      {dish.descripcion && (
+                        <p className="text-[10px] text-gray-400 leading-tight line-clamp-3">
+                          {dish.descripcion}
+                        </p>
+                      )}
+                    </div>
+                    <div className="flex items-center justify-between mt-3">
                       <span className="font-dish font-bold text-primary text-[16px] whitespace-nowrap">
                         {dish.precio}
                       </span>
@@ -1381,22 +1334,17 @@ export default function App() {
               </button>
 
               {/* Image Container */}
-              <div className="w-full aspect-[4/3] bg-primary/5 flex items-center justify-center relative overflow-hidden border-b border-gray-100">
-                {selectedDish.imagen ? (
+              {selectedDish.imagen && (
+                <div className="w-full aspect-[4/3] bg-primary/5 flex items-center justify-center relative overflow-hidden border-b border-gray-100">
                   <img
                     src={selectedDish.imagen}
                     alt={selectedDish.nombre}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
                   />
-                ) : (
-                  <div className="flex flex-col items-center justify-center gap-2">
-                    <Utensils size={48} className="text-primary/20 animate-pulse" />
-                    <span className="font-dish font-bold text-[10px] text-primary/40 uppercase tracking-widest">
-                      Alesus Gourmet
-                    </span>
-                  </div>
-                )}
-              </div>
+                </div>
+              )}
 
               {/* Content Container */}
               <div className="p-6 flex flex-col overflow-y-auto">
