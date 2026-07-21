@@ -1,0 +1,114 @@
+categoría,nombre del plato,descripción,precio,URL de imagen
+Entradas,CAUSA DE PULPO AL OLIVO,"Preparada a base de papa amarilla, ají amarillo, limón, aceite vegetal y pulpo.",S/ 30.00,https://raw.githubusercontent.com/username/repo/main/public/causa_pulpo_olivo.webp
+Entradas,CAUSA DE LANGOSTINOS,"Preparados con deliciosos langostinos flameados, masa de papa amarilla sazonada con crema de ají amarillo y limón.",S/ 35.00,https://raw.githubusercontent.com/username/repo/main/public/causa_langostinos.webp
+Entradas,CAUSA ACEVICHADA,"Fina selección de papas, bañados en salsa cevichera.",S/ 35.00,https://raw.githubusercontent.com/username/repo/main/public/causa_acevichada.webp
+Entradas,TEQUEÑOS CLÁSICOS,Deliciosos tequeños rellenos de puro queso.,S/ 16.00,https://raw.githubusercontent.com/username/repo/main/public/tequenos_clasicos.webp
+Entradas,LECHE DE TIGRE,"Cortes de pescado con nuestra preparación de base especial, acompañado de cebolla en juliana, camote glaseado y choclo.",S/ 20.00,https://raw.githubusercontent.com/username/repo/main/public/leche_tigre.webp
+Entradas,CAUSA DE ATÚN,"Elaborada a base de papa amarilla, ají amarillo, limón, sal al gusto, atún.",S/ 25.00,https://raw.githubusercontent.com/username/repo/main/public/causa_atun.webp
+Cevichazos,CEVICHE DE PESCADO,"Pescado del día, acompañado de camote glaseado y choclo.",S/ 35.00,https://raw.githubusercontent.com/username/repo/main/public/ceviche_pescado.webp
+Cevichazos,CEVICHE ALESUS,"Preparado con pescado fresco, espinaca, cilantro, nuestra base especial, ají limo, choclo y camote glaseado.",S/ 38.00,https://raw.githubusercontent.com/username/repo/main/public/ceviche_alesus.webp
+Cevichazos,CEVICHE DE CONCHAS NEGRAS,"Exquisitas conchas negras, con nuestra preparación de base especial, acompañada de camote glaseado y choclo.",S/ 40.00,https://raw.githubusercontent.com/username/repo/main/public/ceviche_conchas_negras.webp
+Cevichazos,CEVICHE DE PULPO,"Exquisitos trozos de Pulpo, cebolla picada, jugo de limón y cilantro.",S/ 38.00,https://raw.githubusercontent.com/username/repo/main/public/ceviche_pulpo.webp
+Tiraditos,Al natural,Láminas de pescado bañadas en suave crema de limón.,S/ 35.00,
+Tiraditos,Al ají amarillo,Láminas de pescado bañadas en suave crema de ají amarillo.,S/ 38.00,
+Tiraditos,Al rocoto,Láminas de pescado bañadas en suave crema de rocoto.,S/ 38.00,
+Tiraditos,Bicolor,Láminas de pescado bañadas en crema de ají amarillo y rocoto.,S/ 38.00,
+Tiraditos,Tres sabores,"Láminas de pescado bañadas en crema de ají amarillo, rocoto y crema de olivo.",S/ 40.00,
+Chicharrones y Jaleas,Chicharrón de Pescado,"Crujientes trozos de pescado, yucas fritas y salsa criolla.",S/ 35.00,https://raw.githubusercontent.com/username/repo/main/public/chicharron_pescado.webp
+Chicharrones y Jaleas,Chicharrón de Calamar,"Aros de calamar crujientes, yucas fritas y salsa criolla.",S/ 40.00,
+Chicharrones y Jaleas,Chicharrón de Pulpo,"Trozos de pulpo crujientes, yucas fritas y salsa criolla.",S/ 45.00,
+Chicharrones y Jaleas,Chicharrón Mixto,"Crujientes trozos de pescado y mariscos, yucas fritas y salsa criolla.",S/ 40.00,
+Chicharrones y Jaleas,Jalea Mixta,"Pescado y mariscos crocantes, yucas fritas, chifles y salsa criolla.",S/ 45.00,https://raw.githubusercontent.com/username/repo/main/public/jalea_mixta.webp
+Chicharrones y Jaleas,Jalea de Pescado,"Pescado crocante, yucas fritas, chifles y salsa criolla.",S/ 40.00,
+Dúos Marinos,DÚO ORIENTAL,Ceviche de pescado + Chaufa de mariscos.,S/ 35.00,https://raw.githubusercontent.com/username/repo/main/public/duo_oriental.webp
+Dúos Marinos,DÚO CAUSERO,Causa de atún + Ceviche de pescado.,S/ 33.00,https://raw.githubusercontent.com/username/repo/main/public/duo_causero.webp
+Dúos Marinos,DÚO CHICHARRONERO,Ceviche de pescado + Chicharron de pescado.,S/ 35.00,https://raw.githubusercontent.com/username/repo/main/public/duo_chicharronero.webp
+Dúos Marinos,DÚO CLÁSICO,Ceviche de pescado + Arroz con mariscos.,S/ 33.00,https://raw.githubusercontent.com/username/repo/main/public/duo_clasico.webp
+Tríos Marinos,TRÍO POTENTE,Leche de tigre + Arroz con mariscos + Chicharrón de pescado.,S/ 40.00,https://raw.githubusercontent.com/username/repo/main/public/trio_potente_sin_etiqueta.webp
+Tríos Marinos,TRÍO CLÁSICO,Ceviche + Arroz con mariscos + Chicharrón de pescado.,S/ 40.00,https://raw.githubusercontent.com/username/repo/main/public/trio_clasico_sin_etiqueta.webp
+Tríos Marinos,TRÍO CHAUFERO,Ceviche + Chaufa de mariscos + Chicharrón de pescado.,S/ 43.00,https://raw.githubusercontent.com/username/repo/main/public/trio_chaufero_sin_etiqueta.webp
+Tríos Marinos,Trío Marino,Ceviche de pescado + chicharrón de pescado + arroz con mariscos.,S/ 48.00,
+Tríos Marinos,Trío Alesus,Ceviche mixto + chicharrón de calamar + chaufa de mariscos.,S/ 50.00,
+Tríos Marinos,Trío Caliente,"Arroz con mariscos, chicharrón mixto and picante de mariscos.",S/ 48.00,
+Tríos Marinos,Trío Huachano,Ceviche de pescado + arroz con pato + huancaína.,S/ 45.00,
+Tríos Marinos,Trío Norteño,Ceviche de pescado + seco de cabrito + frijoles.,S/ 45.00,
+Tríos Marinos,TRÍO PESQUERO,Ceviche + Arroz con mariscos + Causa de atún.,S/ 43.00,https://raw.githubusercontent.com/username/repo/main/public/trio_pesquero.webp
+Combinados,Combinado de Pescado,Ceviche de pescado + chicharrón de pescado.,S/ 35.00,
+Combinados,Combinado Mixto,Ceviche mixto + chicharrón mixto.,S/ 38.00,
+Combinados,Combinado Especial,Ceviche de pescado + chicharrón de calamar.,S/ 40.00,
+Combinados,Arroz con mariscos + ceviche,Dúo perfecto de arroz con mariscos y ceviche fresco.,S/ 40.00,
+Combinados,Chaufa de pescado + ceviche,Fusión oriental de chaufa de pescado con ceviche fresco.,S/ 38.00,
+Combinados,Chaufa de mariscos + ceviche,Clásico chaufa de mariscos acompañado de ceviche.,S/ 40.00,
+Combinados,Arroz con mariscos + chicharrón,Combinación caliente y crocante de arroz con mariscos y chicharrón.,S/ 40.00,
+Combinados,Chaufa de mariscos + chicharrón,Chaufa de mariscos acompañado de crocante chicharrón.,S/ 40.00,
+Combinados,DÚO CHICHARRONERO,Ceviche de pescado + Chicharrón de pescado.,S/ 35.00,https://raw.githubusercontent.com/username/repo/main/public/duo_chicharronero.webp
+Menú de Niños,Chicharrón de pescado,Acompañado de papas fritas.,S/ 20.00,
+Menú de Niños,Chicharrón de pollo,Acompañado de papas fritas.,S/ 18.00,
+Menú de Niños,Milanesa de pollo,Acompañado de papas fritas.,S/ 18.00,
+Menú de Niños,Salchipapa,Clásica salchipapa para niños.,S/ 15.00,
+Menú de Niños,Tallarines en salsa Alfredo,"Pasta cremosa y suave, ideal para los pequeños.",S/ 20.00,
+Tortillas,Tortilla de Mariscos,Jugosa tortilla de mariscos de temporada.,S/ 30.00,
+Tortillas,Tortilla de Langostinos,Jugosa tortilla a base de langostinos frescos.,S/ 35.00,
+Tortillas,Tortilla de Verduras,Jugosa tortilla a base de verduras frescas.,S/ 20.00,
+Sopas Criollas,SUSTANCIA DE CARNE,Deliciosa sopa con papas nativas y concentrado de carne fina.,S/ 25.00,https://raw.githubusercontent.com/username/repo/main/public/sustancia_carne.webp
+Sopas Criollas,SOPA DE DIETA,"Deliciosos concentrado de carne picada o pollo, papas nativas y cabello de ángel.",S/ 20.00,https://raw.githubusercontent.com/username/repo/main/public/sopa_dieta.webp
+Sopas Marinas,CHUPE DE CANGREJO,"Preparado con cangrejos fresco, apio, poro, huacatay, cebolla, ajo, tomate y pasta de ají.",S/ 40.00,https://raw.githubusercontent.com/username/repo/main/public/chupe_cangrejo.webp
+Sopas Marinas,PARIHUELA DE CABRILLA,Sopa preparada con una deliciosa Cabrilla fresca acompañado con yucas.,S/ 35.00,https://raw.githubusercontent.com/username/repo/main/public/parihuela_cabrilla.webp
+Sopas Marinas,CHUPE DE LANGOSTINO,"Sopa espesa y picante que lleva camarones, papa amarilla y aderezo especial de la casa.",S/ 40.00,https://raw.githubusercontent.com/username/repo/main/public/chupe_langostino.webp
+Sopas Marinas,CHILCANO,"Caldo de cabeza y espinazo acompañado con cebolla, orégano, perejil, trozos de pescado.",S/ 11.00,https://raw.githubusercontent.com/username/repo/main/public/chilcano.webp
+Platos Criollos,TRUCHA FRITA CON PAPA DORADA,"Deliciosa truch frita con papas doradas, arroz y salsa criolla.",S/ 25.00,https://raw.githubusercontent.com/username/repo/main/public/trucha_frita.webp
+Platos Criollos,ARROZ CON PATO,"Delicioso arroz en salsa de Pato, macerado con chicha de jora, zapallo loche y aderezo criollo.",S/ 35.00,https://raw.githubusercontent.com/username/repo/main/public/arroz_pato.webp
+Platos Criollos,CABRITO A LA NORTEÑA CON YUCAS Y FRIJOLES,"Delicioso guiso concentrado de cabrito con yucas o fréjoles, acompañado con arroz y su ensalada criolla.",S/ 35.00,https://raw.githubusercontent.com/username/repo/main/public/cabrito_nortena.webp
+Especialidad del Chef,TACU TACU C/ LOMO,Nuestro tradicional tacu tacu crocante servido con jugoso lomo saltado al wok; una combinación clásica de sabor intenso y reconfortante.,S/ 45.00,https://raw.githubusercontent.com/username/repo/main/public/tacu_tacu_lomo.webp
+Especialidad del Chef,TACU TACU A LO MACHO,"Frejol y arroz salteado, bañado en salsa de mariscos al vino blanco y punto de ají amarillo.",S/ 40.00,https://raw.githubusercontent.com/username/repo/main/public/tacu_tacu.webp
+Pastas,FETUCCINI A LA HUANCAINA CON LOMO SALTADO,Sabroso espagueti al dente servido con una salsa de crema de huancaína y adornado con un exquisito lomo saltado.,S/ 35.00,https://raw.githubusercontent.com/username/repo/main/public/fetuccini_huancaina.webp
+Pastas,FETUCCINI EN SALSA DE MARISCOS,Espagueti al dente con salsa de huancaina cubierto con picante de mariscos.,S/ 38.00,https://raw.githubusercontent.com/username/repo/main/public/fetuccini_mariscos.webp
+Pastas,TALLARINES VERDES CON PECHUGA A LA PLANCHA,"Delicioso espagueti al dente servido con una salsa al puesto, acompañado con pechuga a la plancha bien sazonada.",S/ 35.00,https://raw.githubusercontent.com/username/repo/main/public/tallarines_verdes.webp
+Carnes,LOMO SALTADO,"Exquisitos trozos de lomo salteado, arroz y papas fritas nativas.",S/ 30.00,https://raw.githubusercontent.com/username/repo/main/public/lomo_saltado.webp
+Carnes,BISTEC A LO POBRE,"Delicioso bistec a lo pobre, papas fritas nativas, arroz, huevo frito y plátano frito. Acompañado con cremas a elegir.",S/ 35.00,https://raw.githubusercontent.com/username/repo/main/public/bistec_pobre.webp
+Carnes,PECHUGA A LA PLANCHA CON PAPAS NATIVAS,"Deliciosa pechuga a la plancha, papas fritas nativas and arroz. Acompañado con cremas a elegir.",S/ 28.00,https://raw.githubusercontent.com/username/repo/main/public/pechuga_plancha.webp
+Saltados,TALLARÍN SALTADO DE CARNE,Delicioso espagueti al dente acompañado con salteado de carne.,S/ 28.00,https://raw.githubusercontent.com/username/repo/main/public/tallarin_saltado_carne.webp
+Saltados,TALLARIN SALTADO DE POLLO,Delicioso espagueti al dente acompañado con salteado de pollo.,S/ 28.00,https://raw.githubusercontent.com/username/repo/main/public/tallarin_saltado_pollo.webp
+Guarniciones,Porción de Arroz,Porción de arroz blanco.,S/ 5.00,https://raw.githubusercontent.com/username/repo/main/public/porcion_arroz.webp
+Guarniciones,Porción de Yuca,Porción de yucas fritas o sancochadas.,S/ 6.00,https://raw.githubusercontent.com/username/repo/main/public/porcion_yuca.webp
+Guarniciones,Porción de Camote,Porción de camote glaseado.,S/ 5.00,https://raw.githubusercontent.com/username/repo/main/public/porcion_camote.webp
+Guarniciones,Porción de Papas Fritas,Porción de papas fritas crocantes.,S/ 8.00,https://raw.githubusercontent.com/username/repo/main/public/porcion_papas.webp
+Guarniciones,Porción de Chifles,Porción de chifles norteños.,S/ 5.00,https://raw.githubusercontent.com/username/repo/main/public/porcion_chifles.webp
+Guarniciones,Porción de Cancha,Canchita serrana tostada.,S/ 4.00,https://raw.githubusercontent.com/username/repo/main/public/porcion_cancha.webp
+Gaseosas,Inka 1½,,S/ 12.00,https://raw.githubusercontent.com/username/repo/main/public/gaseosa_500ml.webp
+Gaseosas,Inka 1 l,,S/ 8.00,https://raw.githubusercontent.com/username/repo/main/public/gaseosa_500ml.webp
+Gaseosas,Inka de 600ml,,S/ 5.00,https://raw.githubusercontent.com/username/repo/main/public/gaseosa_500ml.webp
+Gaseosas,Gordita,,S/ 6.00,https://raw.githubusercontent.com/username/repo/main/public/gaseosa_gordita.webp
+Gaseosas,Coca 1½,,S/ 12.00,https://raw.githubusercontent.com/username/repo/main/public/gaseosa_500ml.webp
+Gaseosas,Coca 1 l.,,S/ 8.00,https://raw.githubusercontent.com/username/repo/main/public/gaseosa_500ml.webp
+Gaseosas,Coca 600ml,,S/ 5.00,https://raw.githubusercontent.com/username/repo/main/public/gaseosa_500ml.webp
+Gaseosas,Fanta 500ml,,S/ 4.00,https://raw.githubusercontent.com/username/repo/main/public/gaseosa_500ml.webp
+Gaseosas,Sprite 500,,S/ 4.00,https://raw.githubusercontent.com/username/repo/main/public/gaseosa_500ml.webp
+Gaseosas,Agua san luis personal,,S/ 4.00,https://raw.githubusercontent.com/username/repo/main/public/agua_mineral.webp
+Refrescos Naturales,Chicha 1 l,,S/ 15.00,https://raw.githubusercontent.com/username/repo/main/public/refrescos_jarra.webp
+Refrescos Naturales,Maracuya 1 l,,S/ 15.00,https://raw.githubusercontent.com/username/repo/main/public/refrescos_jarra.webp
+Refrescos Naturales,Chicha ½ lt.,,S/ 8.00,https://raw.githubusercontent.com/username/repo/main/public/refrescos_media_jarra.webp
+Refrescos Naturales,Maracuya ½ lt.,,S/ 8.00,https://raw.githubusercontent.com/username/repo/main/public/refrescos_media_jarra.webp
+Refrescos Naturales,Limonada 1 l,,S/ 18.00,https://raw.githubusercontent.com/username/repo/main/public/refrescos_jarra.webp
+Refrescos Naturales,Limonada ½,,S/ 8.00,https://raw.githubusercontent.com/username/repo/main/public/refrescos_media_jarra.webp
+Refrescos Naturales,Limonada frozen 1 l,,S/ 18.00,https://raw.githubusercontent.com/username/repo/main/public/refrescos_jarra.webp
+Refrescos Naturales,Limonada frozen ½ lt.,,S/ 10.00,https://raw.githubusercontent.com/username/repo/main/public/refrescos_media_jarra.webp
+Bebidas Calientes,Infusiones,"Té, anís, manzanilla.",S/ 3.00,https://raw.githubusercontent.com/username/repo/main/public/infusiones.webp
+Bebidas Calientes,Café Pasado,Taza de café pasado caliente.,S/ 5.00,https://raw.githubusercontent.com/username/repo/main/public/cafe_pasado.webp
+Cervezas,Cusqueña Trigo 620 ml,,S/ 14.00,https://raw.githubusercontent.com/username/repo/main/public/cusquena.webp
+Cervezas,Cusqueña negra 620 ml,,S/ 14.00,https://raw.githubusercontent.com/username/repo/main/public/cusquena.webp
+Cervezas,Pilsen 630ml,,S/ 13.00,https://raw.githubusercontent.com/username/repo/main/public/pilsen.webp
+Vinos,Santiago Queirolo,Botella de vino Santiago Queirolo.,S/ 35.00,https://raw.githubusercontent.com/username/repo/main/public/santiago_queirolo.webp
+Vinos,Tabernero,Botella de vino Tabernero.,S/ 35.00,https://raw.githubusercontent.com/username/repo/main/public/tabernero.webp
+Vinos,Tacama,Botella de vino Tacama.,S/ 45.00,https://raw.githubusercontent.com/username/repo/main/public/tacama.webp
+Vinos,Casillero del Diablo,Botella de vino Casillero del Diablo.,S/ 60.00,https://raw.githubusercontent.com/username/repo/main/public/casillero_del_diablo.webp
+Vinos,Navarro Correas,Botella de vino Navarro Correas.,S/ 50.00,https://raw.githubusercontent.com/username/repo/main/public/navarro_correas.webp
+Tragos,Pisco Sour,Cóctel tradicional a base de pisco.,S/ 18.00,https://raw.githubusercontent.com/username/repo/main/public/pisco_sour.webp
+Tragos,Maracuyá Sour,Exquisita variante de sour con maracuyá.,S/ 18.00,https://raw.githubusercontent.com/username/repo/main/public/maracuya_sour.webp
+Tragos,Chilcano Clásico,Refrescante trago de pisco y ginger ale.,S/ 15.00,https://raw.githubusercontent.com/username/repo/main/public/chilcano_clasico.webp
+Tragos,Chilcano de Maracuyá,Chilcano frutal y tropical con maracuyá.,S/ 15.00,https://raw.githubusercontent.com/username/repo/main/public/chilcano_maracuya.webp
+Tragos,Algarrobina,Cóctel dulce y cremoso a base de algarrobina.,S/ 18.00,https://raw.githubusercontent.com/username/repo/main/public/algarrobina.webp
+Tragos,Piña Colada,Clásico cóctel tropical de crema de coco y piña.,S/ 18.00,https://raw.githubusercontent.com/username/repo/main/public/pina_colada.webp
+Tragos,Machu Picchu,Cóctel colorido representativo peruano.,S/ 20.00,https://raw.githubusercontent.com/username/repo/main/public/machu_picchu.webp
+Tragos,Cuba Libre,Clásica combinación de ron y bebida de cola.,S/ 15.00,https://raw.githubusercontent.com/username/repo/main/public/cuba_libre.webp
+Tragos,Mojito,"Cóctel muy refrescante a base de ron, limón y hierbabuena.",S/ 18.00,https://raw.githubusercontent.com/username/repo/main/public/mojito.webp

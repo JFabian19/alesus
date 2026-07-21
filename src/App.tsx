@@ -637,7 +637,10 @@ export default function App() {
 
       <div className="px-5 pt-4 pb-3">
         <div className="relative w-full rounded-3xl overflow-hidden shadow-xl aspect-[2/1] bg-gradient-to-br from-primary/10 to-secondary/15 border border-primary/20">
-          <img src="/banner_alesus.jpg" alt="Alesus Rest - Cevicheria Banner" className="w-full h-full object-cover" />
+          <picture>
+            <source srcSet="/banner_alesus.webp" type="image/webp" />
+            <img src="/banner_alesus.jpg" alt="Alesus Rest - Cevicheria Banner" className="w-full h-full object-cover" />
+          </picture>
         </div>
       </div>
 
