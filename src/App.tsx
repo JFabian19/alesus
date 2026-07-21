@@ -27,7 +27,6 @@ const LOCAL_IMAGES: Record<string, string> = {
   "CEVICHE DE PESCADO": "/ceviche_pescado.webp",
   "CEVICHE ALESUS": "/ceviche_alesus.webp",
   "CEVICHE DE CONCHAS NEGRAS": "/ceviche_conchas_negras.webp",
-  "Tres sabores": "/tres_sabores.webp",
   "JALEA MIXTA": "/jalea_mixta.webp",
   "Jalea Mixta": "/jalea_mixta.webp",
   "CHICHARRON DE PESCADO": "/chicharron_pescado.webp",
@@ -273,8 +272,8 @@ export default function App() {
                     nombre: name,
                     descripcion: desc,
                     precio: price,
-                    imagen: getLocalImage(name) || 
-                            sheetImg || 
+                    imagen: sheetImg || 
+                            getLocalImage(name) || 
                             defaultImg || 
                             null
                   };

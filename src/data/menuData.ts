@@ -111,8 +111,7 @@ export const DEFAULT_MENU_DATA: Category[] = [
       {
         nombre: "Tres sabores",
         descripcion: "Láminas de pescado bañadas en crema de ají amarillo, rocoto y crema de olivo.",
-        precio: "S/ 40.00",
-        imagen: "/tres_sabores.webp"
+        precio: "S/ 40.00"
       }
     ]
   },
